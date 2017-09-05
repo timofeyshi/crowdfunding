@@ -1,0 +1,33 @@
+<html ng-app="myApp">
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<title>Crowdfund app</title>
+</head>
+<body>
+		<h1>First mean app</h1>
+<div ng-controller="myCtrl">
+	
+	First Name: <input type="text" ng-model="firstName"><br>
+Last Name: <input type="text" ng-model="lastName"><br>
+<br>
+Full Name: {{firstName + " " + lastName}}
+
+</div>
+<form method="post" action="http://localhost:3000/projects/">
+
+<input type="text" name="title">
+<input type="text" name="money">
+<input type="text" name="description">
+<input type="text" name="valute">
+<input type="text" name="image">
+<input type="text" name="date">
+<input type="text" name="endDate">
+<input type="submit" value="ok">
+</form>
+
+
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+<script  src='controllers/controller.js'></script>
+</body>
+
+</html>
