@@ -4,9 +4,12 @@ var bCrypt = require('bcrypt-nodejs');
 
 var timestamp = require('unix-timestamp');
 
+
 module.exports = function(passport,db){
 
  var User = require('../models/user')(db);
+
+var confirm = require('../models/confirm')(db);
 
 	passport.use('signup', new LocalStrategy({
             passReqToCallback : true // allows us to pass back the entire request to the callback
@@ -46,6 +49,24 @@ module.exports = function(passport,db){
                                 console.log('Error in Saving user: '+err);  
                                 throw err;  
                             }
+
+
+
+                        var conf = new confirm();
+
+                        conf.id =  newUser._id;
+                        conf.key = createHash(Math.random().toString(36));
+                            console.log(conf);
+                        conf.save(function(err) {
+                            if (err){
+                                console.log('Error in Saving user: '+err);  
+                                throw err;  
+                            }
+
+                            });
+
+
+
                             console.log('User Registration succesful');    
                             return done(null, newUser);
                         });

@@ -27,6 +27,8 @@ var isCreator = function (req, res, next) {
 
 module.exports = function (passport,db) {
   const project = require('../models/project')(db);
+  var confirm = require('../models/confirm')(db);
+  var User = require('../models/user')(db);
 
   const addUser = function (title, money, description, valute, image, date, endDate,id) {
     var zero = 0;
@@ -93,6 +95,84 @@ module.exports = function (passport,db) {
       console.log('vibor');
     });
   });
+
+router.get('/verify/:id',isAuthenticated, (req, res) => {
+  if (req.user.role === 3){
+    User.findById(req.params.id, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+  }
+
+       if (doc.role === 1) doc.role = 2; 
+      doc.save((err, newUser) => {
+      if (err) {
+
+      } else {
+
+      }
+    });
+
+
+
+
+      res.send(doc);
+    });
+} else  {
+
+res.send("error");
+
+}
+  });
+
+
+
+
+
+
+// Only for testing 
+// Delete this 
+  router.get('/confirms', (req, res) => {
+    
+
+    confirm.find((err, users) => {
+      res.send(users);
+      console.log('vibor');
+    });
+  });
+//End Delete
+
+  router.get('/confirm/:id', (req, res) => {
+    confirm.findOne({key: req.params.id} ,(err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}
+      var confirmId = doc.id; 
+
+      User.findById(confirmId, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}
+      if (doc.role === 0) doc.role = 1; 
+      doc.save((err, newUser) => {
+      if (err) {
+
+      } else {
+
+      }
+    });
+      res.send(doc);
+    });
+
+
+      
+    });
+  });
+
+
+
+
+
+
 
   router.post('/projects',isCreator ,(req, res) => {
     addUser(req.body.title, req.body.money, req.body.description, req.body.valute, req.body.image, req.body.date, req.body.endDate,req.user._id);
