@@ -2,6 +2,8 @@ var LocalStrategy   = require('passport-local').Strategy;
 
 var bCrypt = require('bcrypt-nodejs');
 
+var timestamp = require('unix-timestamp');
+
 module.exports = function(passport,db){
 
  var User = require('../models/user')(db);
@@ -32,7 +34,11 @@ module.exports = function(passport,db){
                         newUser.login = username;
                         newUser.password = createHash(password);
                         newUser.email = req.param('email');
-                       
+                        newUser.role = 0;
+                        newUser.valute = 0;
+                        newUser.language = 0;
+                        newUser.rate = 0;
+                        newUser.date = timestamp.now();
 
                         // save the user
                         newUser.save(function(err) {

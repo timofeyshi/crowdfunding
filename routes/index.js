@@ -3,12 +3,22 @@ const express = require('express');
 const router = express.Router();
 
 var isAuthenticated = function (req, res, next) {
-  // if user is authenticated in the session, call the next() to call the next request handler 
-  // Passport adds this method to request object. A middleware is allowed to add properties to
-  // request and response objects
+  
   if (req.isAuthenticated())
     return next();
-  // if the user is not authenticated then redirect him to the login page
+ 
+  res.redirect('/zv');
+}
+
+
+var isCreator = function (req, res, next) {
+ 
+  if (req.isAuthenticated()) {
+    if (req.user.role >= 2) {
+    return next();
+  }
+  }
+ 
   res.redirect('/zv');
 }
 
@@ -18,8 +28,11 @@ var isAuthenticated = function (req, res, next) {
 module.exports = function (passport,db) {
   const project = require('../models/project')(db);
 
-  const addUser = function (title, money, description, valute, image, date, endDate) {
-    const newProject = new project({ title, money, description, valute, image, date, endDate });
+  const addUser = function (title, money, description, valute, image, date, endDate,id) {
+    var zero = 0;
+    const newProject = new project({ title, money, description, valute, image, date, endDate});
+    newProject.curMoney = 0;
+    newProject.owner = id;
     console.log(newProject);
     newProject.save((err, newUser) => {
       if (err) {
@@ -81,24 +94,30 @@ module.exports = function (passport,db) {
     });
   });
 
-  router.post('/projects', (req, res) => {
-    addUser(req.body.title, req.body.money, req.body.description, req.body.valute, req.body.image, req.body.date, req.body.endDate);
+  router.post('/projects',isCreator ,(req, res) => {
+    addUser(req.body.title, req.body.money, req.body.description, req.body.valute, req.body.image, req.body.date, req.body.endDate,req.user._id);
     console.log(req.body.title);
     res.send('Hello');
   });
 
   router.get('/projects/:id', (req, res) => {
     project.findById(req.params.id, (err, doc) => {
-      if (err) return console.log(err);
-
+      if (err) {  res.send("error");
+        return console.log(err);
+}
       
       res.send(doc);
     });
   });
 
-  router.put('/projects/:id', (req, res) => {
+  router.put('/projects/:id', isAuthenticated,(req, res) => {
     console.log(req.body.description);
 
+
+ project.findById(req.params.id, (err, doc) => {
+  if (err) return console.log(err);
+      var idOwner = doc.owner;
+   if (idOwner === req.user.id || req.user.role === 3) {
     project.findByIdAndUpdate(req.params.id, { title: req.body.title,
       money: req.body.money,
       description: req.body.description,
@@ -109,10 +128,25 @@ module.exports = function (passport,db) {
       if (err) return console.log(err);
       console.log('Обновленный объект', user);
     });
+
     res.send('you update id project');
+} else {
+    res.redirect('/zv');
+
+}
+    });
+
+
+
+
   });
 
-  router.delete('/projects/:id', (req, res) => {
+  router.delete('/projects/:id', isAuthenticated,(req, res) => {
+
+    project.findById(req.params.id, (err, doc) => {
+      if (err) return console.log(err);
+      var idOwner = doc.owner;
+   if (idOwner === req.user.id || req.user.role === 3) {
     project.findByIdAndRemove(req.params.id, (err, doc) => {
       if (err) return console.log(err);
 
@@ -120,6 +154,15 @@ module.exports = function (passport,db) {
     });
 
     res.send('you delete id project');
+
+} else {
+    res.redirect('/zv');
+
+}
+    });
+
+    
+
   });
 
   router.get('/signout', function(req, res) {

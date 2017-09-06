@@ -3,11 +3,13 @@ var mongoose = require('mongoose');
 var projectScheme = new mongoose.Schema( {
     title: { type: String},
     money: { type: Number },
+    curMoney: {type: Number},
     description: { type: String },
     date: { type: Number },
     endDate: { type: Number },
     valute: {type: Number},
-    image: { type: String }
+    image: { type: String },
+    owner: {type:String}
 } );
 
 
