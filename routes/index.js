@@ -29,6 +29,7 @@ module.exports = function (passport,db) {
   const project = require('../models/project')(db);
   var confirm = require('../models/confirm')(db);
   var User = require('../models/user')(db);
+  var verify = require('../models/verify')(db);
 
   const addUser = function (title, money, description, valute, image, date, endDate,id) {
     var zero = 0;
@@ -46,6 +47,76 @@ module.exports = function (passport,db) {
   };
   let skip;
   let limit;
+
+
+
+
+    router.post('/verifyMe',isAuthenticated ,(req, res) => {
+      if (req.user.role === 1){
+
+        const verifyNew = new verify();
+    verifyNew.id = req.user._id;
+    verifyNew.passport = req.body.passport;
+    verifyNew.scan = req.body.scan;
+    console.log(verifyNew);
+    verifyNew.save((err, newUser) => {
+      if (err) {
+
+      } else {
+
+      }
+    });
+
+
+
+
+         res.send('Hello');
+
+      } else {
+         res.send('no');
+      }
+
+  });
+
+     router.get('/newVerify', isAuthenticated, function(req, res){
+       if (req.user.role === 3){
+      verify.find((err, users) => {
+      res.send(users);
+      console.log('vibor');
+    });
+
+    } else {
+       res.send("error");
+    }
+  });
+
+
+
+      router.delete('/verify/:id', isAuthenticated,(req, res) => {
+
+    
+      
+   if (req.user.role === 3) {
+    verify.findByIdAndRemove(req.params.id, (err, doc) => {
+      if (err) return console.log(err);
+
+      console.log('Удален пользователь ', doc);
+    });
+
+    res.send('you delete id project');
+
+} else {
+    res.redirect('/zv');
+
+}
+    
+
+    
+
+  });
+
+
+
 
   router.post('/login', passport.authenticate('login', {
     successRedirect: '/home',
@@ -102,6 +173,7 @@ router.get('/verify/:id',isAuthenticated, (req, res) => {
       if (err) {  res.send("error");
         return console.log(err);
   }
+      if (doc != null) {
 
        if (doc.role === 1) doc.role = 2; 
       doc.save((err, newUser) => {
@@ -112,10 +184,12 @@ router.get('/verify/:id',isAuthenticated, (req, res) => {
       }
     });
 
+res.send(doc);
+} else {
+  res.send("error");
+}
 
-
-
-      res.send(doc);
+      
     });
 } else  {
 
@@ -142,12 +216,14 @@ res.send("error");
 //End Delete
 
   router.get('/confirm/:id', (req, res) => {
+
     confirm.findOne({key: req.params.id} ,(err, doc) => {
       if (err) {  res.send("error");
         return console.log(err);
 }
+      if (doc != null) {
       var confirmId = doc.id; 
-
+      console.log(confirmId);
       User.findById(confirmId, (err, doc) => {
       if (err) {  res.send("error");
         return console.log(err);
@@ -162,6 +238,9 @@ res.send("error");
     });
       res.send(doc);
     });
+    } else {
+            res.send("error");
+    }
 
 
       

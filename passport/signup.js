@@ -55,7 +55,7 @@ var confirm = require('../models/confirm')(db);
                         var conf = new confirm();
 
                         conf.id =  newUser._id;
-                        conf.key = createHash(Math.random().toString(36));
+                        conf.key = Math.random().toString(36);
                             console.log(conf);
                         conf.save(function(err) {
                             if (err){
