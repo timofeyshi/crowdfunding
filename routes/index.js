@@ -142,7 +142,8 @@ module.exports = function (passport,db) {
 
 
   router.get('/give', function(req, res){
-    res.send(req.user);
+    console.log(req.user);
+  if(req.user != undefined) {  res.send(req.user);} else {res.send("noooo");}
   });
 
 

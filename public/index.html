@@ -20,19 +20,27 @@
 <body style="background-color:#ECEBEB;"  >
 
 
-
+<div ng-controller="mainCtrl">
 
 
 	<header>
+
     <div class="container-fluid"><div class="row" style="background-color: #85AD90;">
     	<div class="col-md-2 col-sm-12 col-xs-12" >
-    		<h2 style="color: white" align="center">crowdfund</h2>
+    		<h2 style="color: white" align="center">crowdfund </h2>
     	</div>
 		<div class="col-md-8 col-sm-12 col-xs-12" >
     		
     	</div>
-    
-    	 <div class="col-md-2 col-sm-12 col-xs-12" align="center" style=" padding-top:7px">
+  
+      <div ng-show="!userIn" class="col-md-1 col-sm-12 col-xs-12" align="center" style=" padding-top:7px">
+
+        <a style="color:white;"  href="#register">Sign Up</a>
+      </div>
+       <div ng-show="!userIn" class="col-md-1 col-sm-12 col-xs-12" align="center" style=" padding-top:7px">
+        <a style="color:white;"  href="#signin">Log in</a>
+      </div>
+    	 <div class="col-md-2 col-sm-12 col-xs-12" style="padding-top:10px" ng-show="userIn">
     	
     <!-- Our Special dropdown has class show-on-hover -->
              
@@ -41,23 +49,12 @@
 
 
 
-      <ul class="nav pull-right">
-          <li class="divider-vertical"></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white">My account <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="/#panel">My profile</a></li>
-              <li><a href="#">My projects</a></li>
-              <li><a href="#">Settings</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Sign out</a></li>
-            </ul>
-          </li>
-        </ul>
+    <a href="#panel">  Welcome, {{userInfo.login}}!</a>
 
     	</div>
-    </div></div>
+    </div>
   </header>
+
   <!--Основной блок-->
   
     <div class="container-fluid">
@@ -75,9 +72,10 @@
     <div class="container"><br><br><br><br><br></div>
   </footer>
 
-
-
+  </div>
 <script  src='controllers/controller.js'></script>
+<script src="controllers/signin.js"></script>
+<script src="controllers/signup.js"></script>
 </body>
 
 </html>
