@@ -24,10 +24,12 @@ $rootScope.isIn = false;
     templateUrl: 'views/settings.html'
   })
 .when('/projects', {
-    templateUrl: 'views/panel.html'
+    templateUrl: 'views/panel.html',
+            controller:'projCtrl'
   })
 .when('/add', {
-    templateUrl: 'views/add.html'
+    templateUrl: 'views/add.html',
+     controller:'addCtrl'
   })
 .when('/all', {
     templateUrl: 'views/projects.html'

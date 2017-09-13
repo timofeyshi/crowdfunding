@@ -168,6 +168,20 @@ module.exports = function (passport,db) {
     });
   });
 
+
+router.get('/myProjects',isAuthenticated, (req, res) => {
+    
+
+    project.find({owner: req.user._id}, (err, users) => {
+      res.send(users);
+      console.log('vibor');
+    });
+  });
+
+
+
+
+
 router.get('/verify/:id',isAuthenticated, (req, res) => {
   if (req.user.role === 3){
     User.findById(req.params.id, (err, doc) => {

@@ -1,5 +1,6 @@
 
-    
+    <div ng-controller="projCtrl">
+
  <div class="container-fluid">
       
       <div class="row" >
@@ -35,16 +36,20 @@
 </div>
 
 <div class="col-md-10 col-sm-12 col-xs-12"><br>
-<h2 align="center">My projects<a href="/#add"><button type="button" class="btn btn-success" style="margin-left:10px">Add project</button></a></h2><br>
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  >
-       
+
+<div class="col-md-12">
+<h2 align="center">My projects {{messagePro}}<a href="/#add"><button type="button" class="btn btn-success" style="margin-left:10px">Add project</button></a></h2><br>
+</div>
+<div class="container-fluid"><div class="row" >
+<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="padding-bottom:50px" ng-repeat="proj in myProjects">
+      
           <div class="thumbnail" style="padding: 0; background-color: #F7F7F7">
             <div style="padding:4px">
               <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
             </div>
             <div class="caption">
-              <h2 style="padding-left: 10px; ">Project </h2>
-              <p style="padding-left: 10px; ">My project description. My project description. My project description </p>
+              <h2 style="padding-left: 10px; font-size:16pt">{{proj.title}}</h2>
+              <p style="padding-left: 10px; ">{{proj.description}}</p>
               
             </div>
             <div class="modal-footer" >
@@ -59,14 +64,14 @@
                  
                   
                     <div class="progress">
-                      <div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div data-percentage="0%" style="width: {{proj.curMoney/(proj.money)}}%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     
               
                 </div>
-                <div class="col-md-4"><b>60%</b><br/><small>FUNDED</small></div>
-                <div class="col-md-4"><b>$400</b><br/><small>PLEDGED</small></div>
-                <div class="col-md-4"><b>18</b><br/><small>DAYS</small></div>
+                <div class="col-md-4"><b>{{proj.curMoney/(proj.money)}}</b><br/><small>FUNDED</small></div>
+                <div class="col-md-4"><b>${{proj.money}}</b><br/><small>NEED</small></div>
+                <div class="col-md-4"><b>{{rnd((proj.endDate-proj.date)/60/60/24)}}</b><br/><small>DAYS</small></div>
               </div>
               </div>
             </div>
@@ -75,8 +80,10 @@
       </div>
 
 
-</div>
 
+</div>
+</div>
+</div>
 </div>
       </div>
 
@@ -85,3 +92,4 @@
 
 
 
+</div>
