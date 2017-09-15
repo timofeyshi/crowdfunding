@@ -37,5 +37,10 @@
 	"setWhite":"Set white",
 	"setBlack":"Set black",
 	"confirmTitle":"Confirm e-mail!",
-	"confirmText":"Please check your email"
+	"confirmText":"Please check your email",
+	"verifyTitle":"Verify!",
+	"verifyText":"Please, verify user to create projects",
+	"verify":"Verify me",
+	"checkMe":"Check me",
+	"copyPassport":"Copy of the passport"
 }

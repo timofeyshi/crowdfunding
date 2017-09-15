@@ -45,6 +45,10 @@ $rootScope.isIn = false;
     templateUrl: 'views/edit.html',
             controller:'editCtrl'
   })
+.when('/verify', {
+    templateUrl: 'views/verify.html',
+            controller:'verifyCtrl'
+  })
   .otherwise({
     redirectTo: '/'
   });
@@ -53,6 +57,34 @@ $rootScope.isIn = false;
 app.controller('mainCtrl', 
     function ($scope,$http,$rootScope){
         
+
+      $scope.reInfo = function() {
+          $http({method:'GET', url: '/give'}).
+    then(function success(response) {
+        if (response.data == "noooo") {
+          $rootScope.userIn = false;
+      
+        } else {
+          $rootScope.userIn = true;
+        $rootScope.userInfo = response.data;
+         $rootScope.showConfirmEmail = false;
+       
+       if ($rootScope.userInfo.role <1) {
+        $rootScope.showConfirmEmail = true;
+       }
+       if ($rootScope.userInfo.role == 1) {
+        $rootScope.showVerify = true;
+       }
+
+        }
+            console.log(response.data);
+    }, function error(response){
+            console.log("Возникла ошибка");
+    });
+      
+      }
+
+
       $scope.reLang = function() {
          $http.get('/myLang').success(function(data){
         var urlLang = '/lang/'+data.lang+'.json';
@@ -134,6 +166,15 @@ app.controller('mainCtrl',
     		} else {
     			$rootScope.userIn = true;
     		$rootScope.userInfo = response.data;
+         $rootScope.showConfirmEmail = false;
+       
+       if ($rootScope.userInfo.role <1) {
+        $rootScope.showConfirmEmail = true;
+       }
+       if ($rootScope.userInfo.role == 1) {
+        $rootScope.showVerify = true;
+       }
+
     		}
             console.log(response.data);
     }, function error(response){

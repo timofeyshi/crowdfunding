@@ -53,6 +53,10 @@
       <div class="alert alert-danger" ng-show="showConfirmEmail">
   <strong>{{lang.confirmTitle}}</strong> {{lang.confirmText}}
 </div>
+<div class="alert alert-warning" ng-show="{{showVerify}}">
+  <strong>{{lang.verifyTitle}}</strong> {{lang.verifyText}}<a href="/#/verify"><input class="btn btn-primary" style="margin-left:20px" value="{{lang.verify}}" type="button"></a>
+</div>
+
       <form class="form-horizontal" role="form">
        
         <div class="form-group">
