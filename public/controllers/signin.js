@@ -17,6 +17,7 @@ app.controller('signinCtrl',
                         $scope.otvet = true;
                      } else {
                          $rootScope.userIn = true;
+                          $scope.reLang();
                         $location.path("/");
 
                      }

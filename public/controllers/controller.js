@@ -1,4 +1,4 @@
-var app = angular.module('RoutingApp', ['ngRoute']);
+var app = angular.module('RoutingApp', ['ngRoute','ngSanitize']);
 app.run(function($rootScope) {
 
 $rootScope.isIn = false;
@@ -10,7 +10,8 @@ $rootScope.isIn = false;
   app.config( ['$routeProvider', function($routeProvider) {
   $routeProvider
   .when('/', {
-    templateUrl: 'views/index.html'
+    templateUrl: 'views/index.html',
+     controller:'indexCtrl'
   })
   .when('/signin', {
     templateUrl: 'views/signin.html',
@@ -31,21 +32,60 @@ $rootScope.isIn = false;
     templateUrl: 'views/add.html',
      controller:'addCtrl'
   })
-.when('/all', {
-    templateUrl: 'views/projects.html'
+.when('/all/:id', {
+    templateUrl: 'views/projects.html',
+    controller:'allProjectsCtrl'
   })
-.when('/project', {
-    templateUrl: 'views/index2.html'
+.when('/project/:id', {
+    templateUrl: 'views/index2.html',
+            controller:'projectCtrl'
   })
-
+.when('/edit/:id', {
+    templateUrl: 'views/edit.html',
+            controller:'editCtrl'
+  })
   .otherwise({
     redirectTo: '/'
   });
 }]);
 
 app.controller('mainCtrl', 
-    function mainCtrl($scope,$http,$rootScope){
+    function ($scope,$http,$rootScope){
+        
+      $scope.reLang = function() {
+         $http.get('/myLang').success(function(data){
+        var urlLang = '/lang/'+data.lang+'.json';
 
+        $http.get(urlLang).success(function(data){
+        $scope.lang = data;
+      });
+
+      });
+      }
+
+       $http.get('/myLang').success(function(data){
+        var urlLang = '/lang/'+data.lang+'.json';
+
+        $http.get(urlLang).success(function(data){
+        $scope.lang = data;
+      });
+
+      });
+
+      $scope.setRu = function() {
+        $http.get('/setRu').success(function(data){
+        $scope.reLang();
+      });
+      }
+
+
+       $scope.setEn = function() {
+        $http.get('/setEn').success(function(data){
+        $scope.reLang();
+      });
+
+
+      }
 
     	$http({method:'GET', url: '/give'}).
     then(function success(response) {

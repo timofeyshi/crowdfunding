@@ -1,7 +1,8 @@
 
-    <div ng-controller="addCtrl"> 
+    <div ng-controller="editCtrl"> 
+
  <div class="container-fluid">
-    
+
       <div class="row" >
       <div class="col-md-3 col-sm-12 col-xs-12">
  <div class="fading-side-menu" data-spy="affix" data-offset-top="350">
@@ -9,18 +10,18 @@
             <ul class="list-unstyled">
                 <li>
                     <a href="#panel">
-                        <span class="fa fa-angle-double-right text-primary"></span>{{lang.myprofile}}
+                        <span class="fa fa-angle-double-right text-primary"></span>My account
                     </a>
                 </li>
                 <li>
                     <a href="#projects">
-                        <span class="fa fa-angle-double-right text-primary"></span>{{lang.myProjects}}
+                        <span class="fa fa-angle-double-right text-primary"></span>My projects
                     </a>
                 </li>
                
                 <li>
                     <a href="/signout">
-                        <span class="fa fa-angle-double-right text-primary"></span>{{lang.signOut}}
+                        <span class="fa fa-angle-double-right text-primary"></span>Sign out
                     </a>
                 </li>
             </ul>
@@ -37,15 +38,15 @@
 <div class="col-md-8 col-sm-12 col-xs-12"><br>
 <form class="form-horizontal" ng-submit="Submit();">
   <fieldset>
-    <legend align="center">{{lang.addNewProject}}</legend>
+    <legend align="center">Add new project</legend>
     <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label">{{lang.title}}</label>
+      <label for="inputEmail" class="col-lg-2 control-label">Title</label>
       <div class="col-lg-10">
-        <input class="form-control" id="title" placeholder="Title" ng-model="title" type="text">
+        <input class="form-control" id="title" ng-model="title" type="text">
       </div>
     </div>
     <div class="form-group">
-      <label for="inputPassword" class="col-lg-2 control-label">{{lang.money}}$</label>
+      <label for="inputPassword" class="col-lg-2 control-label">Money $</label>
       <div class="col-lg-10">
         <input class="form-control" id="money" ng-model="money" placeholder="Money">
         <div class="checkbox">
@@ -54,7 +55,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="textArea" class="col-lg-2 control-label">{{lang.description}}</label>
+      <label for="textArea" class="col-lg-2 control-label">Description</label>
       <div class="col-lg-10">
         <textarea class="form-control" rows="3" ng-model="description" id="textArea"></textarea>
         <span class="help-block"></span>
@@ -64,7 +65,7 @@
     <div class="form-group">
   <!-- Элемент HTML с id равным datetimepicker1 -->
 
-  <label for="datetimepicker1" class="col-lg-2 control-label">{{lang.endDate}}</label>
+  <label for="datetimepicker1" class="col-lg-2 control-label">End date</label>
   <div class="input-group date" id="datetimepicker1">
     <input type="text" class="form-control"  data-ng-model="endDate" 
             />
@@ -83,13 +84,13 @@
   <div class="form-group" ng-show="messagesh">
     <label for="exampleInputFile"></label>
    
-    <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>{{message}}
+    <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
   </div>
   <div ng-show="!messagesh">
 File at server
   </div>
 <img ng-src="{{thumbnail.dataUrl}}">
-</div><button  type="button" class="btn btn-primary" ng-click="addProject()">{{lang.addProject}}</button>
+</div><button  type="button" class="btn btn-primary" ng-click="editProject()">Edit project</button>
 </div>
    
 

@@ -1,13 +1,13 @@
 <html ng-app="RoutingApp">
 <head>
 
-
+  <link href="assets/css/style.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/main.css">
-
+<link rel="stylesheet" href="css/languages.min.css">
 
  <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
  <script type="text/javascript" src="js/moment-with-locales.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
@@ -16,10 +16,15 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js"></script>
-  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.2.27/angular-sanitize.min.js"></script>
 
 <script  src='controllers/controller.js'></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <!-- Template CSS -->
 
+  <!--Fonts-->
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 
 
 	<title>Crowdfund app</title>
@@ -35,32 +40,33 @@
 
     <div class="container-fluid"><div class="row" style="background-color: #85AD90;">
     	<div class="col-md-2 col-sm-12 col-xs-12" >
-    		<h2 style="color: white" align="center">crowdfund </h2>
+    		<a style="text-decoration:none; color:white" href="/"><h2 style="color: white" align="center">crowdfund </h2></a>
     	</div>
 		<div class="col-md-8 col-sm-12 col-xs-12" >
-    		
+    		 <div class="dropdown" width="50px" style="background-color: #85AD90">
+  <button onclick="myFunction()" class="dropbtn">{{lang.settings}}</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="" ng-click="setRu()">{{lang.setRu}}</a>
+    <a href="" ng-click="setEn()">{{lang.setEn}}</a>
+    <a href="">{{lang.setWhite}}</a>
+    <a href="">{{lang.setBlack}}</a>
+  </div>
+</div>
     	</div>
   
       <div ng-show="!userIn" class="col-md-1 col-sm-12 col-xs-12" align="center" style=" padding-top:7px">
 
-        <a style="color:white;"  href="#register">Sign Up</a>
+        <a style="color:white;"  href="#register">{{lang.signup}}</a>
       </div>
        <div ng-show="!userIn" class="col-md-1 col-sm-12 col-xs-12" align="center" style=" padding-top:7px">
-        <a style="color:white;"  href="#signin">Log in</a>
+        <a style="color:white;"  href="#signin">{{lang.login}}</a>
       </div>
     	 <div class="col-md-2 col-sm-12 col-xs-12" style="padding-top:10px" ng-show="userIn">
     	
-    <!-- Our Special dropdown has class show-on-hover -->
-             
-        
-      
-
-
-
-    <a href="#panel">  Welcome, {{userInfo.login}}!</a>
+    <a href="#panel">  {{lang.welcome}}, {{userInfo.login}}!</a>
 
     	</div>
-    </div>
+
   </header>
 
   <!--Основной блок-->
@@ -81,11 +87,39 @@
   </footer>
 
   </div>
+
 <script  src='controllers/controller.js'></script>
 <script src="controllers/signin.js"></script>
 <script src="controllers/signup.js"></script>
 <script src="controllers/proj.js"></script>
 <script src="controllers/add.js"></script>
+<script src="controllers/project.js"></script>
+<script src="controllers/edit.js"></script>
+<script src="controllers/index.js"></script>
+<script src="controllers/allProjects.js"></script>
+<script type="text/javascript">
+  /* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+</script>>
 </body>
 
 </html>

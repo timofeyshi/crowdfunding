@@ -7,21 +7,21 @@
       <div class="col-md-2 col-sm-12 col-xs-12">
  <div class="fading-side-menu" data-spy="affix" data-offset-top="350">
             <br>
-            <ul class="list-unstyled">
+           <ul class="list-unstyled">
                 <li>
                     <a href="#panel">
-                        <span class="fa fa-angle-double-right text-primary"></span>My account
+                        <span class="fa fa-angle-double-right text-primary"></span>{{lang.myprofile}}
                     </a>
                 </li>
                 <li>
                     <a href="#projects">
-                        <span class="fa fa-angle-double-right text-primary"></span>My projects
+                        <span class="fa fa-angle-double-right text-primary"></span>{{lang.myProjects}}
                     </a>
                 </li>
                
                 <li>
                     <a href="/signout">
-                        <span class="fa fa-angle-double-right text-primary"></span>Sign out
+                        <span class="fa fa-angle-double-right text-primary"></span>{{lang.signOut}}
                     </a>
                 </li>
             </ul>
@@ -38,19 +38,23 @@
 <div class="col-md-10 col-sm-12 col-xs-12"><br>
 
 <div class="col-md-12">
-<h2 align="center">My projects {{messagePro}}<a href="/#add"><button type="button" class="btn btn-success" style="margin-left:10px">Add project</button></a></h2><br>
+
+<h2 align="center">{{lang.myProjects}} {{messagePro}}<a href="/#add"><button type="button" class="btn btn-success" style="margin-left:10px">{{lang.addProject}}</button></a></h2><br>
 </div>
 <div class="container-fluid"><div class="row" >
 <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" style="padding-bottom:50px" ng-repeat="proj in myProjects">
-      
+     
           <div class="thumbnail" style="padding: 0; background-color: #F7F7F7">
             <div style="padding:4px">
-              <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
+            
+             <a href="#/project/{{proj._id}}"> <img alt="300x200"  style="width: 100%; max-height: 300px;position: relative; " src="proimage/{{proj.image}}"></a>
+             <div style="position: relative;;top:-26px; background-color: #F7F7F7; width:16%">
+             <img src="img/kor.png" width="48%" style="position: relative;left:3px; padding:2px";  ng-click="delete(proj._id)"class="hoverist">
+             <a href="#/edit/{{proj._id}}"><img src="img/red.png" width="40%" style="position: relative;left:3px" class="hoverist"></a>
+             </div>
             </div>
             <div class="caption">
-              <h2 style="padding-left: 10px; font-size:16pt">{{proj.title}}</h2>
-              <p style="padding-left: 10px; ">{{proj.description}}</p>
-              
+              <a href="#/project/{{proj._id}}"><h2 style="padding-left: 10px; font-size:16pt">{{proj.title}}</h2>
             </div>
             <div class="modal-footer" >
              
@@ -69,9 +73,9 @@
                     
               
                 </div>
-                <div class="col-md-4"><b>{{proj.curMoney/(proj.money)}}</b><br/><small>FUNDED</small></div>
-                <div class="col-md-4"><b>${{proj.money}}</b><br/><small>NEED</small></div>
-                <div class="col-md-4"><b>{{rnd((proj.endDate-proj.date)/60/60/24)}}</b><br/><small>DAYS</small></div>
+                <div class="col-md-4"><b>{{proj.curMoney/(proj.money)}}</b><br/><small>{{lang.funded}}</small></div>
+                <div class="col-md-4"><b>${{proj.money}}</b><br/><small>{{lang.need}}</small></div>
+                <div class="col-md-4"><b>{{rnd((proj.endDate-proj.date)/60/60/24)}}</b><br/><small>{{lang.days}}</small></div>
               </div>
               </div>
             </div>

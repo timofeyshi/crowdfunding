@@ -11,9 +11,9 @@
 <div class="col-md-3">
 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Sign In</h3>
+                        <h3 class="panel-title">{{lang.login}}</h3>
                     </div>
-                    <div class="panel-body">{{userIn}}
+                    <div class="panel-body">
                     <div class="alert alert-danger" ng-show="otvet">
   <strong>Incorrect</strong> password or username
 </div>
@@ -25,13 +25,9 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" ng-model="pass" type="password" value="">
                                 </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
-                                </div>
+                               
                                 
-                                <a href="" class="btn btn-sm btn-success" ng-click="login(email,pass)">Login</a> <a href="/#register">Register</a>
+                                <a href="" class="btn btn-sm btn-success" ng-click="login(email,pass)">{{lang.login}}</a> <a href="/#register">{{lang.register}}</a>
                                  <a href="" class="btn btn-sm btn-success" ng-click="check()">check</a>
                             </fieldset>
                         </form>

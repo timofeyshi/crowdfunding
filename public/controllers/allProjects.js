@@ -1,9 +1,13 @@
-app.controller('projCtrl', 
-    function projCtrl($scope,$http,$location,$rootScope){
-       $scope.apple2 = "new apple";
+app.controller('allProjectsCtrl', 
+    function allProjectsCtrl($scope,$http,$location,$rootScope,$routeParams){
 
-       var reread = function() {
-         $http({method:'GET', url: '/myProjects'}).
+  $scope.rnd = function(inVar) {
+        return Math.trunc(inVar)+1;
+       }
+      var id =  $routeParams['id'];
+      var urlPro = '/projects?page=' +  id;
+      console.log(urlPro);
+       $http({method:'GET', url: urlPro}).
     then(function success(response) {
             if (response.data == "noooo") {
               $scope.messagePro = "you can't see"
@@ -16,42 +20,25 @@ app.controller('projCtrl',
             console.log("Возникла ошибка");
     });
 
-
-       };
-
-
-       $scope.delete = function(id) {
-        
-
-        var delteUrl = "/projects/" + id;
-
-         $http.delete(delteUrl).then(function success (response) {
-                    console.log(response.data);
-
-                });
- 
-     reread();     
-        console.log(delteUrl);
-
-       }
-
-
-       $scope.rnd = function(inVar) {
-        return Math.round(inVar)+1;
-       }
-
-    $http({method:'GET', url: '/myProjects'}).
+    $http({method:'GET', url: "/getPages"}).
     then(function success(response) {
             if (response.data == "noooo") {
               $scope.messagePro = "you can't see"
         
             } else {
-              $scope.myProjects = response.data;
+              $scope.page = response.data;
+              for (var i = 0; i<$scope.rnd(($scope.page.length)/8);i++) {
+      $scope.numbers.push({"page":i+1});
+    }
+
             }
             console.log(response.data);
     }, function error(response){
             console.log("Возникла ошибка");
     });
+
+    $scope.numbers = [];
+    
 
 
     }

@@ -14,7 +14,7 @@
 <div class="col-md-3">
 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Sign up</h3>
+                        <h3 class="panel-title">{{lang.signup}}</h3>
                     </div>
                      <div class="alert alert-danger" ng-show="otvet">
   <strong>Username</strong> is used
@@ -36,7 +36,7 @@
                                 </div>
                               
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="javascript:;" class="btn btn-sm btn-success" ng-click="signup(email,username,pass)">Register</a> <a href="/#signin">Sign in</a>
+                                <a href="javascript:;" class="btn btn-sm btn-success" ng-click="signup(email,username,pass)">{{lang.register}}</a> <a href="/#signin">{{lang.login}}</a>
                             </fieldset>
                         </form>
                     </div>
