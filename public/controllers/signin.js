@@ -18,6 +18,7 @@ app.controller('signinCtrl',
                      } else {
                          $rootScope.userIn = true;
                           $scope.reLang();
+                          $scope.reColor();
                         $location.path("/");
 
                      }

@@ -30,40 +30,41 @@
 	<title>Crowdfund app</title>
 	
 </head>
-<body style="background-color:#ECEBEB;"  >
+<body ng-controller="mainCtrl" style="background-color:{{color.backgroundColor}}; color:{{color.textColor}} ;
+"  >
 
 
-<div ng-controller="mainCtrl">
+<div >
 
 
 	<header>
 
-    <div class="container-fluid"><div class="row" style="background-color: #85AD90;">
+    <div class="container-fluid"><div class="row" style="background-color: {{color.headerColor}};">
     	<div class="col-md-2 col-sm-12 col-xs-12" >
-    		<a style="text-decoration:none; color:white" href="/"><h2 style="color: white" align="center">crowdfund </h2></a>
+    		<a style="text-decoration:none; color:{{color.fontColor}}" href="/"><h2 style="color: {{color.fontColor}}" align="center">crowdfund </h2></a>
     	</div>
 		<div class="col-md-8 col-sm-12 col-xs-12" >
-    		 <div class="dropdown" width="50px" style="background-color: #85AD90">
+    		 <div class="dropdown" width="50px" style="background-color: {{color.headerColor}}">
   <button onclick="myFunction()" class="dropbtn">{{lang.settings}}</button>
   <div id="myDropdown" class="dropdown-content">
     <a href="" ng-click="setRu()">{{lang.setRu}}</a>
     <a href="" ng-click="setEn()">{{lang.setEn}}</a>
-    <a href="">{{lang.setWhite}}</a>
-    <a href="">{{lang.setBlack}}</a>
+    <a href="" ng-click="setWhite()">{{lang.setWhite}}</a>
+    <a href="" ng-click="setBlack()">{{lang.setBlack}}</a>
   </div>
 </div>
     	</div>
   
       <div ng-show="!userIn" class="col-md-1 col-sm-12 col-xs-12" align="center" style=" padding-top:7px">
 
-        <a style="color:white;"  href="#register">{{lang.signup}}</a>
+        <a style="color:{{color.fontColor}};"  href="#register">{{lang.signup}}</a>
       </div>
        <div ng-show="!userIn" class="col-md-1 col-sm-12 col-xs-12" align="center" style=" padding-top:7px">
-        <a style="color:white;"  href="#signin">{{lang.login}}</a>
+        <a style="color:{{color.fontColor}};"  href="#signin">{{lang.login}}</a>
       </div>
     	 <div class="col-md-2 col-sm-12 col-xs-12" style="padding-top:10px" ng-show="userIn">
     	
-    <a href="#panel">  {{lang.welcome}}, {{userInfo.login}}!</a>
+    <a href="#panel" style="color:{{color.fontColor}}">  {{lang.welcome}}, {{userInfo.login}}!</a>
 
     	</div>
 

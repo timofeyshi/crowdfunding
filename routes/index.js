@@ -343,6 +343,117 @@ router.get('/setEn', (req, res) => {
     
   });
 
+router.get('/myColor', (req, res) => {
+       if (req.user != undefined) {
+   
+
+       User.findById(req.user.id, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+  }
+      if (doc != null) {
+
+       if (doc.rate == 1) {
+        res.send({color:"black"});
+       } else {
+        res.send({color:"white"});
+       }
+     
+
+
+} else {
+  res.send("error");
+}
+
+      
+    });
+
+
+
+    } else {
+    if (req.session.color == undefined) {
+      res.send({color:"white"});
+    } else {
+      res.send({color:req.session.color});
+    }
+    }
+  });
+
+router.get('/setBlack', (req, res) => {
+    if (req.user != undefined) {
+   
+
+       User.findById(req.user.id, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+  }
+      if (doc != null) {
+
+       doc.rate = 1;
+      doc.save((err, newUser) => {
+      if (err) {
+
+      } else {
+
+      }
+    });
+
+
+} else {
+  res.send("error");
+}
+
+      
+    });
+
+
+
+    }
+    
+    req.session.color = "black";
+    
+    res.send("ok");
+  });
+
+router.get('/setWhite', (req, res) => {
+       if (req.user != undefined) {
+   
+
+       User.findById(req.user.id, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+  }
+      if (doc != null) {
+
+       doc.rate = 0;
+      doc.save((err, newUser) => {
+      if (err) {
+
+      } else {
+
+      }
+    });
+
+
+} else {
+  res.send("error");
+}
+
+      
+    });
+
+
+
+    }
+    req.session.color = "white";
+     res.send("ok");
+    
+  });
+
+
+
+
+
 router.get('/verify/:id',isAuthenticated, (req, res) => {
   if (req.user.role === 3){
     User.findById(req.params.id, (err, doc) => {

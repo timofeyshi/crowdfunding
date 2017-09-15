@@ -20,8 +20,8 @@
 			<div class="row">
 				<div class="content col-md-8 col-sm-12 col-xs-12">
 					<div class="section-block">
-						<div class="funding-meta">
-							<h1>{{project.title}}</h1>
+						<div class="funding-meta" >
+							<h1 style="background-color:{{color.headerColor}}">{{project.title}}</h1>
 							<span class="type-meta"><i class="fa fa-user"></i> Jonathan Doe</span>
 							<span class="type-meta"><i class="fa fa-tag"></i> <a href="#">#crowdfunding</a>, <a href="#">#launch</a> </span>
 							
@@ -39,7 +39,7 @@
 							<span class="goal-progress"><strong>${{project.curMoney}}</strong> {{lang.of}} ${{project.money}}</span>
 						</div>
 						<span class="count-down"><strong>{{rnd((project.endDate-project.date)/60/60/24)}}</strong>{{lang.daysToGo}}</span>
-						<a href="#" class="btn btn-launch">{{lang.help}} </a>
+						<a href="#" style="background-color:{{color.headerColor}}" class="btn btn-launch">{{lang.help}} </a>
 					</div>
 					<!--signup-->
 					
@@ -59,7 +59,7 @@
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="about">
 								<div class="about-information">
-									<h1 class="section-title">{{lang.about}} {{project.title}}</h1>
+									<h1 class="section-title" style="color:{{color.headerColor}}">{{lang.about}} {{project.title}}</h1>
 									<p ng-bind-html="project.description"></p>
 								</div>
 							</div>

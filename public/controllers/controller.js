@@ -63,6 +63,18 @@ app.controller('mainCtrl',
       });
       }
 
+      $scope.reColor = function() {
+        $http.get('/myColor').success(function(data){
+       var urlColor = '/color/'+data.color+'.json';
+
+        $http.get(urlColor).success(function(data){
+        $scope.color = data;
+      });
+  });
+}
+
+
+
        $http.get('/myLang').success(function(data){
         var urlLang = '/lang/'+data.lang+'.json';
 
@@ -71,6 +83,32 @@ app.controller('mainCtrl',
       });
 
       });
+
+ $http.get('/myColor').success(function(data){
+       var urlColor = '/color/'+data.color+'.json';
+
+        $http.get(urlColor).success(function(data){
+        $scope.color = data;
+      });
+  });
+
+ $scope.setBlack = function() {
+        $http.get('/setBlack').success(function(data){
+        $scope.reColor();
+      });
+      }
+
+
+       $scope.setWhite = function() {
+        $http.get('/setWhite').success(function(data){
+        $scope.reColor();
+      });
+
+
+      }
+
+
+
 
       $scope.setRu = function() {
         $http.get('/setRu').success(function(data){
