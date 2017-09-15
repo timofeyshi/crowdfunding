@@ -1,6 +1,6 @@
-
+<div ng-controller="panelCtrl">
  <div class="container-fluid">
-      
+
       <div class="row" >
       <div class="col-md-2 col-sm-12 col-xs-12">
  <div class="fading-side-menu" data-spy="affix" data-offset-top="350">
@@ -50,6 +50,9 @@
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
       
       <h3>{{lang.personalInfo}}</h3>
+      <div class="alert alert-danger" ng-show="showConfirmEmail">
+  <strong>{{lang.confirmTitle}}</strong> {{lang.confirmText}}
+</div>
       <form class="form-horizontal" role="form">
        
         <div class="form-group">
@@ -94,6 +97,6 @@
       </div>
 
     </div>
-
+</div>
   <!--Футер-->
   

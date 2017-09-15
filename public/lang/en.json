@@ -35,5 +35,7 @@
 	"setRu":"Set Russian",
 	"setEn":"Set English",
 	"setWhite":"Set white",
-	"setBlack":"Set black"
+	"setBlack":"Set black",
+	"confirmTitle":"Confirm e-mail!",
+	"confirmText":"Please check your email"
 }

@@ -523,7 +523,8 @@ res.send("error");
 
       }
     });
-      res.send(doc);
+     
+      res.redirect('/#/panel');
     });
     } else {
             res.send("error");

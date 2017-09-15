@@ -22,7 +22,8 @@ $rootScope.isIn = false;
             controller:'signupCtrl'
   })
 .when('/panel', {
-    templateUrl: 'views/settings.html'
+    templateUrl: 'views/settings.html',
+    controller:'panelCtrl'
   })
 .when('/projects', {
     templateUrl: 'views/panel.html',
