@@ -14,8 +14,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#projects">
-                        <span class="fa fa-angle-double-right text-primary"></span>{{lang.myProjects}}
+                    <a href="#projects" ng-show="{{userInfo.role >=2}}">
+                        <span class="fa fa-angle-double-right text-primary" ></span>{{lang.myProjects}}
+                    </a>
+                </li>
+                  <li ng-show="{{userInfo.role ==3}}">
+                    <a href="#adminPanel" >
+                        <span class="fa fa-angle-double-right text-primary" ></span>{{lang.adminPanel}}
                     </a>
                 </li>
                

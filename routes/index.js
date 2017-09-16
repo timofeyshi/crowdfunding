@@ -126,6 +126,59 @@ router.post('/upload', function (req, res) {
     }
   });
 
+  router.get('/getUsers',isAuthenticated,function(req, res){
+      if (req.user.role === 3){
+      User.find((err, users) => {
+        var listUsers = [];
+        verify.find((err, verifyCol) => {
+            
+      
+      users.forEach(function(item) {
+        var verifyBool = 0;
+        var verifyTable = {
+          _id:0,
+          scan:0,
+          passport:0
+        };
+         for (var it in verifyCol) {
+          
+          if (verifyCol[it].id == item._id) {
+            verifyBool = 1;
+            verifyTable = verifyCol[it];
+          } 
+         }
+     
+          var list = {
+            id:item._id,
+            date:item.date,
+            valute:item.valute,
+            role:item.role,
+            email:item.email,
+            login:item.login,
+            verify:verifyBool,
+            verifyId:verifyTable._id,
+            verifyScan:verifyTable.scan,
+            verifyDescription:verifyTable.passport
+          };
+          listUsers.push(list);
+        });
+    res.send(listUsers);
+    });
+
+        
+    
+      
+
+      
+    });
+
+   } else {
+      res.send("error");
+   }
+  });
+
+
+
 
 
       router.delete('/verify/:id', isAuthenticated,(req, res) => {
@@ -133,7 +186,7 @@ router.post('/upload', function (req, res) {
     
       
    if (req.user.role === 3) {
-    verify.findByIdAndRemove(req.params.id, (err, doc) => {
+    verify.deleteOne({id:req.params.id}, (err, doc) => {
       if (err) return console.log(err);
 
       console.log('Удален пользователь ', doc);

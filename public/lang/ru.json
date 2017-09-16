@@ -42,5 +42,20 @@
 	"verifyText":"Для возможнсти создания проектов",
 	"verify":"Пройти проверку",
 	"checkMe":"Форма проверки",
-	"copyPassport":"Копия пасспорта"
+	"copyPassport":"Копия пасспорта",
+	"adminPanel":"Админ панель",
+	"userList":"Пользователи",
+	"allUsers":"Все пользователи",
+	"onlyVerifyed":"Только проверенные",
+	"onlyWho":"Подали заявку",
+	"status":"Статус",
+	"lastLogin":"Заходил",
+	"registerDate":"Дата регистрации",
+	"numberProjects":"Проектов",
+	"verifyButton":"Проверить",
+	"banButton":"Забанить",
+	"deleteButton":"Удалить",
+	"okButton":"Принять",
+	"cancelButton":"Закрыть",
+	"userDescription":"Описание"
 }

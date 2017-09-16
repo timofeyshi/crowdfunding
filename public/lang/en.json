@@ -42,5 +42,20 @@
 	"verifyText":"Please, verify user to create projects",
 	"verify":"Verify me",
 	"checkMe":"Check me",
-	"copyPassport":"Copy of the passport"
+	"copyPassport":"Copy of the passport",
+	"adminPanel":"Admin panel",
+	"userList":"User List",
+	"allUsers":"All users",
+	"onlyVerifyed":"Only verifyed",
+	"onlyWho":"Only who applied",
+	"status":"Status",
+	"lastLogin":"Last login",
+	"registerDate":"Register date",
+	"numberProjects":"Number of projects",
+	"verifyButton":"Verify",
+	"banButton":"Ban",
+	"deleteButton":"Delete",
+	"okButton":"Accept",
+	"cancelButton":"Close",
+	"userDescription":"User description"
 }

@@ -12,11 +12,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#projects">
-                        <span class="fa fa-angle-double-right text-primary"></span>{{lang.myProjects}}
+                    <a href="#projects" ng-show="{{userInfo.role >=2}}">
+                        <span class="fa fa-angle-double-right text-primary" ></span>{{lang.myProjects}}
                     </a>
                 </li>
-               
+                  <li ng-show="{{userInfo.role ==3}}">
+                    <a href="#adminPanel" >
+                        <span class="fa fa-angle-double-right text-primary" ></span>{{lang.adminPanel}}
+                    </a>
+                </li>
                 <li>
                     <a href="/signout">
                         <span class="fa fa-angle-double-right text-primary"></span>{{lang.signOut}}
@@ -50,10 +54,10 @@
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
       
       <h3>{{lang.personalInfo}}</h3>
-      <div class="alert alert-danger" ng-show="showConfirmEmail">
+      <div class="alert alert-danger" ng-show="{{userInfo.role ==0}}">
   <strong>{{lang.confirmTitle}}</strong> {{lang.confirmText}}
 </div>
-<div class="alert alert-warning" ng-show="{{showVerify}}">
+<div class="alert alert-warning" ng-show="{{userInfo.role ==1}}">
   <strong>{{lang.verifyTitle}}</strong> {{lang.verifyText}}<a href="/#/verify"><input class="btn btn-primary" style="margin-left:20px" value="{{lang.verify}}" type="button"></a>
 </div>
 
