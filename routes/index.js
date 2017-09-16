@@ -1,6 +1,7 @@
 const express = require('express');
 var multer  = require('multer');
 var markdown = require('markdown').markdown
+var bCrypt = require('bcrypt-nodejs');
 
 
 
@@ -120,6 +121,44 @@ router.post('/upload', function (req, res) {
       res.send(users);
       console.log('vibor');
     });
+
+    } else {
+       res.send("error");
+    }
+  });
+
+      router.get('/block/:id', isAuthenticated, function(req, res){
+       if (req.user.role === 3){
+      
+         User.findByIdAndUpdate(req.params.id, { password: "$2a$10$rgvhtWnUfeZseBPVkuVYkuHmSw9h317K3IjxvwGA.xM5jPjyZH50e"}, (err, user) => {
+      if (err) return console.log(err);
+      console.log('Обновленный объект', user);
+    });
+
+         res.send("ok");
+
+
+
+
+    } else {
+       res.send("error");
+    }
+  });
+
+
+router.get('/delete/:id', isAuthenticated, function(req, res){
+       if (req.user.role === 3){
+        User.findByIdAndRemove(req.params.id, (err, doc) => {
+      if (err) return console.log(err);
+
+      console.log('Удален пользователь ', doc);
+    });
+       
+
+         res.send("ok");
+
+
+
 
     } else {
        res.send("error");

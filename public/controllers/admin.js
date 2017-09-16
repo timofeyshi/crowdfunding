@@ -24,6 +24,36 @@ var reUser = function() {
     });
     	}
 
+    	$scope.block = function() {
+    		for (it in choosenUsers) {
+    			var id = choosenUsers[it];
+    		var urlAdress = "/block/" + id;
+    		 $http({method:'GET', url: urlAdress}).
+    then(function success(response) {
+            
+            console.log(response.data);
+    }, function error(response){
+            console.log("Возникла ошибка");
+    });
+
+}
+    	}
+
+$scope.delete = function() {
+    		for (it in choosenUsers) {
+    			var id = choosenUsers[it];
+    		var urlAdress = "/delete/" + id;
+    		 $http({method:'GET', url: urlAdress}).
+    then(function success(response) {
+            
+            console.log(response.data);
+    }, function error(response){
+            console.log("Возникла ошибка");
+    });
+    reUser();
+}
+    	}
+
         $scope.toggleModal = function() {
         $scope.modalShown = !$scope.modalShown;
    };
@@ -45,8 +75,9 @@ var reUser = function() {
 
                 });
    				console.log(urlAdress);
-   				reUser();
+   				
    			$scope.toggleModal();
+   			reUser();
    		}
 
     	$scope.chooseUser = function(id,verifyBoo,us) {
@@ -154,18 +185,35 @@ var reUser = function() {
     }, function error(response){
             console.log("Возникла ошибка");
     });
-     $scope.getColor = function(role,id) {
+     $scope.getColor = function(role,id,rol) {
      	var color = $scope.getChooseColor(id);
      	if (role == 1) {
      		if (color == "Thistle") {
      			return color
      		} else {
-     		return "LightGreen"}
+     			if (rol != 2) {
+     		return "LightGreen" } else {
+     			return color
+     		}}
      	} else {
      		return color;
      	}
      }
 
+     $scope.getStatus = function(status) {
+     	if (status == 0) {
+     		return "Email not verified"
+     	}
+     	if (status == 1) {
+     		return "Email verified"
+     	}
+     	if (status == 2) {
+     		return "Passport verified"
+     	}
+     	return "Admin"
+
+
+     }
 
     }
 

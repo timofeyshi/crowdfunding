@@ -76,13 +76,13 @@
     </tr>
   </thead>
                         <tbody>
-                            <tr ng-repeat="user in allUsers" ng-click="chooseUser(user.id,user.verify,user)" style="background-color: {{getColor(user.verify,user.id)}}; cursor:pointer">
+                            <tr ng-repeat="user in allUsers" ng-click="chooseUser(user.id,user.verify,user)" style="background-color: {{getColor(user.verify,user.id,user.role)}}; cursor:pointer">
                                 
                                 <td >
                                      {{user.login}}<br><i class="fa fa-envelope"></i>
                                 </td>
                                 <td>
-                                    {{user.role}}
+                                    {{getStatus(user.role)}}
                                 </td>
                                 <td align="center">
                                   -<br><small class="text-muted">1 days ago</small>
@@ -98,8 +98,8 @@
                      
                         </tbody>
                     </table><br>
-                    <button type="button" style="margin:5px" ng-click='toggleModal()' onclick="window.scroll(0,0);" ng-show="showVerify()" class="btn btn-primary">{{lang.verifyButton}}</button><button ng-show="showDelete()" type="button" class="btn btn-warning">{{lang.banButton}}</button>
-<button ng-show="showDelete()" type="button" class="btn btn-danger">{{lang.deleteButton}}</button>
+                    <button type="button" style="margin:5px" ng-click='toggleModal()' onclick="window.scroll(0,0);" ng-show="showVerify()" class="btn btn-primary">{{lang.verifyButton}}</button><button ng-show="showDelete()" ng-click="block()" type="button" class="btn btn-warning">{{lang.banButton}}</button>
+<button ng-show="showDelete()" type="button" ng-click="delete()" class="btn btn-danger">{{lang.deleteButton}}</button>
                 </div>
             </div>
         </div>
