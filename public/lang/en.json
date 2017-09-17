@@ -57,5 +57,7 @@
 	"deleteButton":"Delete",
 	"okButton":"Accept",
 	"cancelButton":"Close",
-	"userDescription":"User description"
+	"userDescription":"User description",
+	"titleAddNews":"Add new to project",
+	"addButton":"Add"
 }

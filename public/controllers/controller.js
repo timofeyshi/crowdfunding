@@ -217,8 +217,8 @@ app.directive('modalDialog', function() {
         scope: {
             show: '='
         },
-        replace: true, // Замените на шаблон
-        transclude: true, // мы хотим вставлять пользовательский контент внутри директивы
+        replace: true, 
+        transclude: true, 
         link: function(scope, element, attrs) {
             scope.dialogStyle = {};
 
@@ -234,6 +234,6 @@ app.directive('modalDialog', function() {
                 scope.show = false;
             };
         },
-        template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-close' ng-click='hideModal()'>X</div><div class='ng-modal-dialog-content' ng-transclude></div> </div></div>" // Смотрите ниже
+        template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideModal()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-close' ></div><div class='ng-modal-dialog-content' ng-transclude></div> </div></div>" // Смотрите ниже
     };
 });

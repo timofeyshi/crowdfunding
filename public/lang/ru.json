@@ -20,7 +20,7 @@
 "addNewProject": "Добавить новый проект",
 "title": "Название",
 "money":"деньги",
-"description": "запечатленный",
+"description": "Описание",
 "endDate": "Дата окончания",
 "funded": "ФИНАНСИРУЕМЫЙ",
 "need":"потребность",
@@ -57,5 +57,7 @@
 	"deleteButton":"Удалить",
 	"okButton":"Принять",
 	"cancelButton":"Закрыть",
-	"userDescription":"Описание"
+	"userDescription":"Описание",
+	"titleAddNews":"Добавить новость к проекту",
+	"addButton":"Добавить"
 }

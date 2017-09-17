@@ -1,6 +1,36 @@
 
     <div ng-controller="projCtrl">
+<modal-dialog show='modalShown' width='750px' height='60%'>
+ <div class="container-fluid">
 
+      <div class="row" >
+      <div class="col-md-2 col-sm-12 col-xs-12">
+   
+  
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">  
+
+    <h2>{{lang.titleAddNews}}</h2>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">{{lang.title}}</label>
+      <div class="col-lg-12">
+        <input class="form-control" id="title" placeholder="Title" ng-model="title" type="text">
+      </div>
+    </div>
+   
+    <div class="form-group">
+      <label for="textArea" class="col-lg-2 control-label">{{lang.description}}</label>
+      <div class="col-lg-12">
+        <textarea class="form-control" rows="3" ng-model="description" id="textArea"></textarea>
+        <span class="help-block"></span>
+      </div>
+    </div>
+<button type="button" style="margin:5px"  ng-click="addNew(title,description);toggleModal()" onclick=" $(window).unbind('scroll');" class="btn btn-primary">{{lang.addButton}}</button><button  ng-click="toggleModal()" onclick=" $(window).unbind('scroll');" class="btn btn-danger">{{lang.cancelButton}} </button>
+
+    </div>
+    </div>
+    </div>
+</modal-dialog>
  <div class="container-fluid">
       
       <div class="row" >
@@ -53,9 +83,10 @@
             <div style="padding:4px">
             
              <a href="#/project/{{proj._id}}"> <img alt="300x200"  style="width: 100%; max-height: 300px;position: relative; " src="proimage/{{proj.image}}"></a>
-             <div style="position: relative;;top:-26px; background-color: #F7F7F7; width:16%">
-             <img src="img/kor.png" width="48%" style="position: relative;left:3px; padding:2px";  ng-click="delete(proj._id)"class="hoverist">
-             <a href="#/edit/{{proj._id}}"><img src="img/red.png" width="40%" style="position: relative;left:3px" class="hoverist"></a>
+             <div style="position: relative;;top:-26px; background-color: #F7F7F7; width:24%">
+             <img src="img/kor.png" width="28%" style="position: relative;left:3px; padding:2px";  ng-click="delete(proj._id)" class="hoverist">
+             <a href="#/edit/{{proj._id}}"><img src="img/red.png" width="24%" style="position: relative;left:3px" class="hoverist"></a>
+             <img src="img/plus.jpg" onclick="window.scroll(0,0); var winScrollTop = $(window).scrollTop();$(window).bind('scroll', function() {$(window).scrollTop(winScrollTop);});" width="30%" ng-click='clickPlus(proj._id);toggleModal()' style="position: relative;left:3px; padding:2px";   class="hoverist">
              </div>
             </div>
             <div class="caption">
@@ -94,11 +125,34 @@
 </div>
 </div>
 </div>
-      </div>
 
+      </div>
+ 
     </div>
 
 
 
 
 </div>
+<script type="text/javascript">
+  function OffScroll() {
+  var winScrollTop = $(window).scrollTop();
+  $(window).bind('scroll', function() {
+    $(window).scrollTop(winScrollTop);
+  });
+}
+
+$(document).ready(function() {
+  $('.block').click(function() {
+    OffScroll();
+  });
+});
+
+$(document).ready(function() {
+  $('.open').click(function() {
+    $(window).unbind('scroll');
+  });
+});
+
+
+</script>

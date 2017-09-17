@@ -49,6 +49,22 @@ module.exports = function (passport,db) {
   var confirm = require('../models/confirm')(db);
   var User = require('../models/user')(db);
   var verify = require('../models/verify')(db);
+  var news = require('../models/news')(db);
+
+
+   const addNew = function (id,title,text,date) {
+    var zero = 0;
+    const newPost = new news({ id,title,text,date});
+    console.log(newPost);
+    newPost.save((err, newUser) => {
+      if (err) {
+
+      } else {
+        console.log("saved!");
+      }
+    });
+  };
+
 
   const addUser = function (title, money, description, valute, image, date, endDate,id) {
     var zero = 0;
@@ -627,6 +643,42 @@ res.send("error");
     });
   });
 
+
+
+
+  router.post('/news',isCreator ,(req, res) => {
+   
+    project.findById(req.body.id, (err, doc) => {
+      if (err) return console.log(err);
+      var idOwner = doc.owner;
+   if (idOwner === req.user.id || req.user.role === 3) {
+      addNew(req.body.id,req.body.title, req.body.text, req.body.date);
+    console.log(req.body.title);
+
+    res.send('you add new');
+
+} else {
+    res.redirect('/zv');
+
+}
+    });
+
+    
+   
+  });
+
+
+  router.get('/news/:id', (req, res) => {
+    news.find({id:req.params.id}, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+     // var mark = doc.text;
+    //  doc.text = markdown.toHTML(mark);
+      console.log(doc);
+      res.send(doc);
+    });
+  });
 
 
 

@@ -98,7 +98,7 @@
                      
                         </tbody>
                     </table><br>
-                    <button type="button" style="margin:5px" ng-click='toggleModal()' onclick="window.scroll(0,0);" ng-show="showVerify()" class="btn btn-primary">{{lang.verifyButton}}</button><button ng-show="showDelete()" ng-click="block()" type="button" class="btn btn-warning">{{lang.banButton}}</button>
+                    <button type="button" style="margin:5px" ng-click='toggleModal()' onclick="window.scroll(0,0);" ng-show="showVerify()" class="btn btn-primary block">{{lang.verifyButton}}</button><button ng-show="showDelete()" ng-click="block()" type="button" class="btn btn-warning">{{lang.banButton}}</button>
 <button ng-show="showDelete()" type="button" ng-click="delete()" class="btn btn-danger">{{lang.deleteButton}}</button>
                 </div>
             </div>
@@ -123,11 +123,34 @@
 <p style="color:black"><strong>{{lang.username}}</strong>: {{verifyUser.login}}</p>
 <p style="color:black"><strong>{{lang.email}}</strong>: {{verifyUser.email}}</p>
 <p style="color:black"><strong>{{lang.registerDate}}</strong>: {{verifyUser.date| date:'dd.MM.yyyy'}}</p>
-<button type="button" style="margin:5px" ng-click="acceptUser(verifyUser.id)" class="btn btn-primary">{{lang.okButton}}</button><button type="button" ng-click="toggleModal()" class="btn btn-danger">{{lang.cancelButton}} </button>
+<button type="button" style="margin:5px" ng-click="acceptUser(verifyUser.id)" onclick=" $(window).unbind('scroll');"  class="btn btn-primary">{{lang.okButton}}</button><button type="button" ng-click="toggleModal()" onclick=" $(window).unbind('scroll');" class="btn btn-danger">{{lang.cancelButton}} </button>
     </div>
     </div>
     </div>
 </modal-dialog>
+
 </div>
 
  
+<script type="text/javascript">
+  function OffScroll() {
+  var winScrollTop = $(window).scrollTop();
+  $(window).bind('scroll', function() {
+    $(window).scrollTop(winScrollTop);
+  });
+}
+
+$(document).ready(function() {
+  $('.block').click(function() {
+    OffScroll();
+  });
+});
+
+$(document).ready(function() {
+  $('.open').click(function() {
+    $(window).unbind('scroll');
+  });
+});
+
+
+</script>

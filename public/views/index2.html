@@ -48,8 +48,8 @@
 					<div class="section-block">
 						<div class="section-tabs">
 							<ul class="nav nav-tabs" role="tablist">
-								<li role="presentation" class="active"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">{{lang.about}}</a></li>
-								<li role="presentation"><a href="#updates" aria-controls="updates" role="tab" data-toggle="tab">{{lang.news}}</a></li>
+								<li role="presentation" class="active"><a href="" aria-controls="about" ng-click="showAbout()" role="tab" data-toggle="tab">{{lang.about}}</a></li>
+								<li role="presentation"><a href="" aria-controls="updates" ng-click="showNews()" role="tab" data-toggle="tab">{{lang.news}} ({{newsPosts.length}})</a></li>
 							</ul>
 						</div>
 					</div>
@@ -57,31 +57,22 @@
 					<!--tab panes-->
 					<div class="section-block">
 						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="about">
+							<div role="tabpanel" class="tab-pane active" ng-show="!news" id="about">
 								<div class="about-information">
 									<h1 class="section-title" style="color:{{color.headerColor}}">{{lang.about}} {{project.title}}</h1>
 									<p ng-bind-html="project.description"></p>
 								</div>
 							</div>
-							<div role="tabpanel" class="tab-pane" id="updates">
+							<div role="tabpanel" class="tab-pane active" ng-show="news" id="updates">
 								<div class="update-information">
-								<h1 class="section-title">UPDATES</h1>
+								<h1 class="section-title">Project news</h1>
 									<!--update items-->
-									<div class="update-post">
-										<h4 class="update-title">We've started shipping!</h4>
-										<span class="update-date">Posted 2 days ago</span>
-										<p>Suspendisse luctus at massa sit amet bibendum. Cras commodo congue urna, vel dictum velit bibendum eget. Vestibulum quis risus euismod, facilisis lorem nec, dapibus leo. Quisque sodales eget dolor iaculis dapibus. Vivamus sit amet lacus ipsum. Nullam varius lobortis neque, et efficitur lacus. Quisque dictum tellus nec mi luctus imperdiet. Morbi vel aliquet velit, accumsan dapibus urna. Cras ligula orci, suscipit id eros non, rhoncus efficitur nisi.</p>
+									<div class="update-post" ng-repeat="post in newsPosts">
+										<h4 class="update-title">{{post.title}}</h4>
+										<span class="update-date">{{post.date *1000| date:'dd.MM.yyyy'}}</span>
+										<p>{{post.text}}</p>
 									</div>
-									<div class="update-post">
-										<h4 class="update-title">Launch begins manufacturing </h4>
-										<span class="update-date">Posted 9 days ago</span>
-										<p>Suspendisse luctus at massa sit amet bibendum. Cras commodo congue urna, vel dictum velit bibendum eget. Vestibulum quis risus euismod, facilisis lorem nec, dapibus leo. Quisque sodales eget dolor iaculis dapibus. Vivamus sit amet lacus ipsum. Nullam varius lobortis neque, et efficitur lacus. Quisque dictum tellus nec mi luctus imperdiet. Morbi vel aliquet velit, accumsan dapibus urna. Cras ligula orci, suscipit id eros non, rhoncus efficitur nisi.</p>
-									</div>
-									<div class="update-post">
-										<h4 class="update-title">Designs have now been finalized</h4>
-										<span class="update-date">Posted 17 days ago</span>
-										<p>Suspendisse luctus at massa sit amet bibendum. Cras commodo congue urna, vel dictum velit bibendum eget. Vestibulum quis risus euismod, facilisis lorem nec, dapibus leo. Quisque sodales eget dolor iaculis dapibus. Vivamus sit amet lacus ipsum. Nullam varius lobortis neque, et efficitur lacus. Quisque dictum tellus nec mi luctus imperdiet. Morbi vel aliquet velit, accumsan dapibus urna. Cras ligula orci, suscipit id eros non, rhoncus efficitur nisi.</p>
-									</div>
+									
 									<!--/update items-->
 								</div>
 							</div>
