@@ -50,6 +50,8 @@ module.exports = function (passport,db) {
   var User = require('../models/user')(db);
   var verify = require('../models/verify')(db);
   var news = require('../models/news')(db);
+  var comment = require('../models/comment')(db);
+  var rating = require('../models/rating')(db);
 
 
    const addNew = function (id,title,text,date) {
@@ -65,6 +67,31 @@ module.exports = function (passport,db) {
     });
   };
 
+  const addComment = function (idProject,idUser,loginUser,text,date) {
+
+    const newPost = new comment({ idProject,idUser,loginUser,text,date});
+    console.log(newPost);
+    newPost.save((err, newUser) => {
+      if (err) {
+
+      } else {
+        console.log("saved!");
+      }
+    });
+  };
+
+  const addRating = function (idProject,idUser,loginUser,rate) {
+
+    const newPost = new rating({ idProject,idUser,loginUser,rate});
+    console.log(newPost);
+    newPost.save((err, newUser) => {
+      if (err) {
+
+      } else {
+        console.log("saved!");
+      }
+    });
+  };
 
   const addUser = function (title, money, description, valute, image, date, endDate,id) {
     var zero = 0;
@@ -668,6 +695,61 @@ res.send("error");
   });
 
 
+
+  router.post('/comments',isAuthenticated ,(req, res) => {
+   
+    
+      
+   if (req.user.role >=1) {
+      addComment(req.body.idProject,req.user.id,req.user.login,  req.body.text, req.body.date);
+    console.log(req.user);
+
+    res.send('you add comment');
+
+} else {
+    res.redirect('/zv');
+
+}
+    
+
+    
+   
+  });
+
+
+
+ router.post('/rating',isAuthenticated ,(req, res) => {
+   
+    
+      
+   if (req.user.role >=1) {
+
+    rating.find({idProject:req.body.idProject,idUser:req.user.id}, (err, doc) => {
+      
+      if (doc.length > 0) {
+        console.log("uze est",doc);
+      } else {
+        console.log("dobavir");
+        addRating(req.body.idProject,req.user.id,req.user.login,  req.body.rate);
+      }
+
+     // 
+
+    });
+    console.log(req.user);
+
+    res.send('you add comment');
+
+} else {
+    res.redirect('/zv');
+
+}
+    
+
+    
+   
+  });
+
   router.get('/news/:id', (req, res) => {
     news.find({id:req.params.id}, (err, doc) => {
       if (err) {  res.send("error");
@@ -681,7 +763,30 @@ res.send("error");
   });
 
 
+router.get('/rating/:id', (req, res) => {
+    rating.find({idProject:req.params.id}, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+     // var mark = doc.text;
+    //  doc.text = markdown.toHTML(mark);
+      console.log(doc);
+      res.send(doc);
+    });
+  });
 
+
+router.get('/comments/:id', (req, res) => {
+    comment.find({idProject:req.params.id}, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+     // var mark = doc.text;
+    //  doc.text = markdown.toHTML(mark);
+      console.log(doc);
+      res.send(doc);
+    });
+  });
 
 
 

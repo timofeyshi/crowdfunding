@@ -59,5 +59,8 @@
 	"cancelButton":"Закрыть",
 	"userDescription":"Описание",
 	"titleAddNews":"Добавить новость к проекту",
-	"addButton":"Добавить"
+	"addButton":"Добавить",
+	"comments":"Комментарии",
+
+	"projectNews":"Новости проекта"
 }

@@ -50,6 +50,7 @@
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation" class="active"><a href="" aria-controls="about" ng-click="showAbout()" role="tab" data-toggle="tab">{{lang.about}}</a></li>
 								<li role="presentation"><a href="" aria-controls="updates" ng-click="showNews()" role="tab" data-toggle="tab">{{lang.news}} ({{newsPosts.length}})</a></li>
+								<li role="presentation"><a href="" aria-controls="updates" ng-click="showComments()" role="tab" data-toggle="tab">{{lang.comments}} ({{newComments.length}})</a></li>
 							</ul>
 						</div>
 					</div>
@@ -57,7 +58,7 @@
 					<!--tab panes-->
 					<div class="section-block">
 						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" ng-show="!news" id="about">
+							<div role="tabpanel" class="tab-pane active" ng-show="about" id="about">
 								<div class="about-information">
 									<h1 class="section-title" style="color:{{color.headerColor}}">{{lang.about}} {{project.title}}</h1>
 									<p ng-bind-html="project.description"></p>
@@ -65,7 +66,7 @@
 							</div>
 							<div role="tabpanel" class="tab-pane active" ng-show="news" id="updates">
 								<div class="update-information">
-								<h1 class="section-title">Project news</h1>
+								<h1 class="section-title">{{lang.projectNews}}</h1>
 									<!--update items-->
 									<div class="update-post" ng-repeat="post in newsPosts">
 										<h4 class="update-title">{{post.title}}</h4>
@@ -74,6 +75,24 @@
 									</div>
 									
 									<!--/update items-->
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane active" ng-show="comments" id="updates">
+								<div class="update-information">
+								<h1 class="section-title">{{lang.comments}}</h1>
+									<!--update items-->
+									<div class="update-post" ng-repeat="post in newComments">
+										
+										<span class="update-date">{{post.date *1000| date:'dd.MM.yyyy'}} {{post.loginUser}}</span>
+										<p>{{post.text}}</p>
+									</div>
+									<div >
+									<table><tr><td>
+									<textarea rows="2" cols="60" name="text" style="" ng-model="textComment"></textarea></td><td > 
+									<a href="" style="background-color:{{color.headerColor}}" ng-click="addComment(textComment)" class="btn btn-launch">{{lang.addButton}} </a></td>
+									<!--/update items-->
+									</tr></table>
+								</div>
 								</div>
 							</div>
 						</div>
