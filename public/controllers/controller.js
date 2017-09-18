@@ -53,7 +53,10 @@ $rootScope.isIn = false;
     templateUrl: 'views/adminPanel.html',
             controller:'adminCtrl'
   })
-
+.when('/helpProject/:id', {
+    templateUrl: 'views/help.html',
+            controller:'helpCtrl'
+  })
   .otherwise({
     redirectTo: '/'
   });

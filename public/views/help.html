@@ -1,0 +1,86 @@
+
+    <div ng-controller="helpCtrl"> 
+ <div class="container-fluid">
+    
+      <div class="row" >
+      <div class="col-md-3 col-sm-12 col-xs-12">
+ <div class="fading-side-menu" data-spy="affix" data-offset-top="350">
+            <br>
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#panel">
+                        <span class="fa fa-angle-double-right text-primary"></span>{{lang.myprofile}}
+                    </a>
+                </li>
+                <li>
+                    <a href="#projects">
+                        <span class="fa fa-angle-double-right text-primary"></span>{{lang.myProjects}}
+                    </a>
+                </li>
+               
+                <li>
+                    <a href="/signout">
+                        <span class="fa fa-angle-double-right text-primary"></span>{{lang.signOut}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+		
+
+
+
+
+
+
+</div>
+
+<div class="col-md-8 col-sm-12 col-xs-12"><br>
+<form class="form-horizontal" ng-submit="Submit();">
+  <fieldset>
+
+    <legend align="center">Help project</legend>
+   
+    <div class="form-group">
+      <label for="inputPassword" class="col-lg-2 control-label">{{lang.money}}$</label>
+      <div class="col-lg-10">
+        <input class="form-control" id="money" ng-model="money" placeholder="Money">
+        <div class="checkbox">
+        
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-10">
+    <div class="form-group">
+  <!-- Элемент HTML с id равным datetimepicker1 -->
+
+
+
+
+ 
+
+</div><button  type="button" class="btn btn-primary" ng-click="addPayment(money)">Pay</button>
+</div>
+   
+
+
+
+
+</form>
+</div>
+
+</div>
+      
+
+    </div>
+</div>
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker1').datetimepicker(
+      {pickTime: false, language: 'ru'}
+    );
+
+ 
+
+  });
+</script>

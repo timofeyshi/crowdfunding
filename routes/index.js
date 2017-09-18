@@ -52,7 +52,7 @@ module.exports = function (passport,db) {
   var news = require('../models/news')(db);
   var comment = require('../models/comment')(db);
   var rating = require('../models/rating')(db);
-
+  var payment = require('../models/payment')(db);
 
    const addNew = function (id,title,text,date) {
     var zero = 0;
@@ -70,6 +70,19 @@ module.exports = function (passport,db) {
   const addComment = function (idProject,idUser,loginUser,text,date) {
 
     const newPost = new comment({ idProject,idUser,loginUser,text,date});
+    console.log(newPost);
+    newPost.save((err, newUser) => {
+      if (err) {
+
+      } else {
+        console.log("saved!");
+      }
+    });
+  };
+
+  const addPayment = function (idProject,idUser,loginUser,sum,date) {
+
+    const newPost = new payment({ idProject,idUser,loginUser,sum,date});
     console.log(newPost);
     newPost.save((err, newUser) => {
       if (err) {
@@ -750,6 +763,49 @@ res.send("error");
    
   });
 
+router.get('/pay/:id/:sum',isAuthenticated ,(req, res) => {
+   
+    
+      
+   if (req.user.role >=1) {
+
+    console.log(req.params.id);
+    console.log(req.params.sum);
+    console.log(req.user);
+
+
+     project.findById(req.params.id, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}
+addPayment(req.params.id,req.user.id,req.user.login,  req.params.sum, Date.now()/1000);
+      doc.curMoney = Number(doc.curMoney)  + Number(req.params.sum);
+      doc.save((err, newUser) => {
+      if (err) {
+
+      } else {
+
+      }
+    });
+     
+    
+    });
+
+    res.send('you add money');
+
+} else {
+    res.redirect('/zv');
+
+}
+    
+
+    
+   
+  });
+
+
+
+
   router.get('/news/:id', (req, res) => {
     news.find({id:req.params.id}, (err, doc) => {
       if (err) {  res.send("error");
@@ -788,7 +844,29 @@ router.get('/comments/:id', (req, res) => {
     });
   });
 
+router.get('/payment/:id', (req, res) => {
+    payment.find({idProject:req.params.id}, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+     // var mark = doc.text;
+    //  doc.text = markdown.toHTML(mark);
+      console.log(doc);
+      res.send(doc);
+    });
+  });
 
+router.get('/maxpay', (req, res) => {
+    payment.find( (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+     // var mark = doc.text;
+    //  doc.text = markdown.toHTML(mark);
+      console.log(doc);
+      res.send(doc);
+    }).sort({sum:-1}).limit(10);
+  });
 
   router.post('/projects',isCreator ,(req, res) => {
     addUser(req.body.title, req.body.money, req.body.description, req.body.valute, req.body.image, req.body.date, req.body.endDate,req.user._id);

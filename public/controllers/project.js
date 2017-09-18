@@ -2,7 +2,7 @@ app.controller('projectCtrl',
     function ($scope,$http,$location,$rootScope,$routeParams){
       $scope.news=false;
       $scope.comments = false;
-      $scope.about = false;
+      $scope.about = true;
       $scope.showComments = function() {
         $scope.comments = true;
         $scope.about = false;
