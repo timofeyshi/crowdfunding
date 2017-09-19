@@ -4,7 +4,25 @@ app.controller('indexCtrl',
        $scope.rnd = function(inVar) {
         return Math.round(inVar)+1;
        }
-      
+       $http({method:'GET', url: "/allNews"}).
+    then(function success(response) {
+            $scope.allNews=  response.data;
+            
+    }, function error(response){
+            console.log("Возникла ошибка");
+    }
+  );
+
+
+
+       $http({method:'GET', url: "/bestProjects"}).
+    then(function success(response) {
+            $scope.bestProjects=  response.data;
+            
+    }, function error(response){
+            console.log("Возникла ошибка");
+    }
+  );
       $http({method:'GET', url: '/newProjects'}).
     then(function success(response) {
             if (response.data == "noooo") {

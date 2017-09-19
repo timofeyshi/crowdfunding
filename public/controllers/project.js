@@ -9,6 +9,8 @@ app.controller('projectCtrl',
         $scope.news = false;
       }
 
+
+
       $scope.showNews = function() {
         $scope.comments = false;
         $scope.about = false;
@@ -50,13 +52,66 @@ app.controller('projectCtrl',
     var urlNews = "/news/" + id;
     var urlComment = "/comments/" + id;
     var urlRating = "/rating/" + id;
-     $http({method:'GET', url: urlReq}).
+     var urlGoals = "/targets/" + id;
+     $http({method:'GET', url: urlGoals}).
     then(function success(response) {
-            $scope.project =  response.data;
+            $scope.goals =  response.data;
     }, function error(response){
             console.log("Возникла ошибка");
     }
   );
+
+     $http({method:'GET', url: urlReq}).
+    then(function success(response) {
+            $scope.project =  response.data;
+            if ($scope.project.valute == -1) {
+              $scope.showTitle = false;
+            } else {
+              $scope.showTitle = true;
+            }
+    }, function error(response){
+            console.log("Возникла ошибка");
+    }
+  );
+     
+
+     $scope.getBackground = function(money,date) {
+      console.log($scope.project.curMoney);
+      if (money <= $scope.project.curMoney) {
+        return "LightGray";
+      } else {
+        if (date<Date.now()/1000) {
+      return "PeachPuff"
+        } else {
+        return ""
+      }
+      }
+      
+      
+    };
+
+
+    $scope.getAchieved = function(moneyGoal) {
+      if (moneyGoal<=$scope.project.curMoney) {
+        return true;
+      } else {
+        return false;
+      }
+     return false;
+    };
+
+    $scope.getWarning = function(money,date) {
+       if (money <= $scope.project.curMoney) {
+        return false;
+      } else {
+       if (date<Date.now()/1000) {
+      return true;
+        } else {
+        return false;
+      }
+    }
+    }
+
     console.log(urlNews);
      $http({method:'GET', url: urlNews}).
     then(function success(response) {

@@ -53,6 +53,7 @@ module.exports = function (passport,db) {
   var comment = require('../models/comment')(db);
   var rating = require('../models/rating')(db);
   var payment = require('../models/payment')(db);
+  var target = require('../models/target')(db);
 
    const addNew = function (id,title,text,date) {
     var zero = 0;
@@ -70,6 +71,19 @@ module.exports = function (passport,db) {
   const addComment = function (idProject,idUser,loginUser,text,date) {
 
     const newPost = new comment({ idProject,idUser,loginUser,text,date});
+    console.log(newPost);
+    newPost.save((err, newUser) => {
+      if (err) {
+
+      } else {
+        console.log("saved!");
+      }
+    });
+  };
+
+  const addTarget = function (idProject,title,description,sum,date) {
+
+    const newPost = new target({ idProject,title,description,sum,date});
     console.log(newPost);
     newPost.save((err, newUser) => {
       if (err) {
@@ -334,6 +348,76 @@ router.get('/delete/:id', isAuthenticated, function(req, res){
 
 
 
+var compareProject = function(user) {
+target.find({idProject:user._id}, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+      if (doc.length != 0) {
+        
+        if (doc[0].date > Date.now()/1000) {
+          
+        } else {
+          
+          if (user.curMoney < doc[0].sum) {
+            user.valute = -1;
+            user.save((err, newUser) => {
+      if (err) {
+
+      } else {
+
+      }
+    });
+            console.log(user);
+          } else {
+
+          }
+
+         // if (users[itIn].curMoney<doc[0].sum) {
+        //  console.log(users[itIn]);
+        //  console.log("prosrochen");
+      //  }
+        }
+      } else {
+       // console.log("net");
+      }
+      
+    
+     
+    }).sort({sum:1}).limit(1);
+
+}
+
+var isProjectTime = function(user) {
+  
+  if (user.endDate < Date.now()/1000) {
+    if (user.curMoney > user.money) {
+      user.valute = 1;
+    } else {
+      user.valute = -1;
+    }
+    user.save((err, newUser) => {
+      if (err) {
+
+      } else {
+
+      }
+    });
+
+    console.log(user);
+  } else {
+
+  }
+};
+
+var checkProjects = function(users) {
+  for (it in users) {
+        
+         console.log(users[it].title);
+         isProjectTime(users[it]);
+         compareProject(users[it]);
+      }
+};
 
 
   router.get('/projects', (req, res) => {
@@ -348,17 +432,32 @@ router.get('/delete/:id', isAuthenticated, function(req, res){
 
     var endProj = page*8;
     
-    project.find((err, users) => {
+    project.find({valute:0},(err, users) => {
       res.send(users.slice(startProj, endProj));
+      checkProjects(users);
       console.log('vibor');
     });
   });
 
+router.get('/bestProjects', (req, res) => {
+    
+    
+    
+    
+    project.find({valute:1},(err, users) => {
+      res.send(users);
+      checkProjects(users);
+      console.log('vibor');
+    }).sort({date:-1}).limit(4);
+  });
+
+
 router.get('/newProjects', (req, res) => {
     
 
-    project.find((err, users) => {
+    project.find({valute:0},(err, users) => {
       res.send(users);
+      checkProjects(users);
       console.log('vibor');
     }).sort({date:-1});
   });
@@ -380,6 +479,7 @@ router.get('/myProjects',isAuthenticated, (req, res) => {
 
     project.find({owner: req.user._id}, (err, users) => {
       res.send(users);
+      checkProjects(users);
       console.log('vibor');
     });
   });
@@ -709,6 +809,29 @@ res.send("error");
 
 
 
+    router.post('/targets',isCreator ,(req, res) => {
+   
+    project.findById(req.body.idProject, (err, doc) => {
+      if (err) return console.log(err);
+      var idOwner = doc.owner;
+   if (idOwner === req.user.id || req.user.role === 3) {
+      addTarget(req.body.idProject,req.body.title, req.body.text, req.body.sum ,req.body.date);
+    console.log(req.body.title);
+
+    res.send('you add target');
+
+} else {
+    res.redirect('/zv');
+
+}
+    });
+
+    
+   
+  });
+
+
+
   router.post('/comments',isAuthenticated ,(req, res) => {
    
     
@@ -818,6 +941,30 @@ addPayment(req.params.id,req.user.id,req.user.login,  req.params.sum, Date.now()
     });
   });
 
+router.get('/allNews', (req, res) => {
+    news.find( (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+     // var mark = doc.text;
+    //  doc.text = markdown.toHTML(mark);
+      console.log(doc);
+      res.send(doc);
+    }).sort({date:-1}).limit(4);
+  });
+
+
+ router.get('/targets/:id', (req, res) => {
+    target.find({idProject:req.params.id}, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+     // var mark = doc.text;
+    //  doc.text = markdown.toHTML(mark);
+      console.log(doc);
+      res.send(doc);
+    }).sort({sum:1});
+  });
 
 router.get('/rating/:id', (req, res) => {
     rating.find({idProject:req.params.id}, (err, doc) => {
@@ -956,6 +1103,8 @@ console.log(doc);
     
 
   });
+
+
 
   router.get('/signout', function(req, res) {
     req.logout();

@@ -61,5 +61,8 @@
 	"titleAddNews":"Add new to project",
 	"addButton":"Add",
 	"comments":"Comments",
-	"projectNews":"Project news"
+	"projectNews":"Project news",
+	"goal":"GOALS",
+	"achieved":"achieved",
+	"overdue":"overdue"
 }

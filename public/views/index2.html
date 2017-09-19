@@ -21,7 +21,8 @@
 				<div class="content col-md-8 col-sm-12 col-xs-12">
 					<div class="section-block">
 						<div class="funding-meta" >
-							<h1 style="background-color:{{color.headerColor}}">{{project.title}}</h1>
+							<h1 ng-show="showTitle" style="background-color:{{color.headerColor}}">{{project.title}}</h1>
+							<h1 ng-show="!showTitle" style="background-color:red">{{project.title}}</h1>
 							<span class="type-meta"><i class="fa fa-user"></i> Jonathan Doe</span>
 							<span class="type-meta"><i class="fa fa-tag"></i> <a href="#">#crowdfunding</a>, <a href="#">#launch</a> </span>
 							
@@ -39,7 +40,7 @@
 							<span class="goal-progress"><strong>${{project.curMoney}}</strong> {{lang.of}} ${{project.money}}</span>
 						</div>
 						<span class="count-down"><strong>{{rnd((project.endDate-project.date)/60/60/24)}}</strong>{{lang.daysToGo}}</span>
-						<a href="#/helpProject/{{project._id}}" style="background-color:{{color.headerColor}}" class="btn btn-launch">{{lang.help}} </a>
+						<a href="#/helpProject/{{project._id}}" ng-show="showTitle" style="background-color:{{color.headerColor}}" class="btn btn-launch">{{lang.help}} </a>
 					</div>
 					<!--signup-->
 					
@@ -128,36 +129,20 @@
 						</div>
 					</div>
 					<div class="section-block">
-						<h1 class="section-title">REWARDS</h1>
+						<h1 class="section-title">{{lang.goal}}</h1>
 						<!--reward blocks-->
-						<div class="reward-block">
-							<h3>$10</h3>
-							<h2>Early Bird</h2>
-							<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-							<span><i class="fa fa-users"></i> 180 backers</span>
-							<a href="" class="btn btn-reward">GET THIS REWARD</a>
+						<div  class="reward-block" ng-repeat="goal in goals" style="background-color:{{getBackground(goal.sum,goal.date)}} ">
+
+
+
+							<h3 >${{goal.sum}}</h3><h3 ng-show="getAchieved(goal.sum,goal.date)" style="background-color: DarkSlateGray">{{lang.achieved}}</h3>
+							<h3 ng-show="getWarning(goal.sum,goal.date)" style="background-color: red">{{lang.overdue}}</h3>
+							<h2>{{goal.title}}</h2>
+							<p>{{goal.description}}</p>
+							<span><i class="fa fa-users"></i>{{goal.date*1000| date:'dd.MM.yyyy'}}</span>
+							
 						</div>
-						<div class="reward-block popular">
-							<h3>$20</h3>
-							<h2>Value Bird</h2>
-							<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-							<span><i class="fa fa-users"></i> 320 backers</span>
-							<a href="" class="btn btn-reward">GET THIS REWARD</a>
-						</div>
-						<div class="reward-block">
-							<h3>$30</h3>
-							<h2>Super Bird</h2>
-							<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-							<span><i class="fa fa-users"></i> 105 backers</span>
-							<a href="" class="btn btn-reward">GET THIS REWARD</a>
-						</div>
-						<div class="reward-block last">
-							<h3>$50</h3>
-							<h2>Premium Bird</h2>
-							<p>Curabitur accumsan sem sed velit ultrices fermentum. Pellentesque rutrum mi nec ipsum elementum aliquet. Sed id vestibulum eros. Nullam nunc velit, viverra sed consequat ac, pulvinar in metus.</p>
-							<span><i class="fa fa-users"></i> 64 backers</span>
-							<a href="" class="btn btn-reward">GET THIS REWARD</a>
-						</div>
+						
 						<!--/reward blocks-->
 					</div>
 					<!--credits-->

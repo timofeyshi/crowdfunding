@@ -39,7 +39,8 @@ console.log(fd);
             "money":$scope.money,
             "endDate":mydate.getTime()/1000,
             "date":Date.now()/1000,
-            "image":fileName
+            "image":fileName,
+            "valute":"0"
         };
         console.log(data);
         $http.post("/projects", data).then(function success (response) {

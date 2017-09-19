@@ -1,7 +1,9 @@
 
     <div ng-controller="projCtrl">
 <modal-dialog show='modalShown' width='750px' height='60%'>
- <div class="container-fluid">
+<a href="" ng-click="addNewsBool = true;addTargetBool = false;">Add new to project</a>
+ <a href="" ng-click="addNewsBool = false;addTargetBool = true;">Add target</a>
+ <div class="container-fluid" ng-show="addNewsBool">
 
       <div class="row" >
       <div class="col-md-2 col-sm-12 col-xs-12">
@@ -29,6 +31,53 @@
 
     </div>
     </div>
+    </div>
+
+     <div class="container-fluid" ng-show="addTargetBool">
+
+      <div class="row" >
+      
+    <div class="col-md-6 col-sm-12 col-xs-12">  
+
+    <h2>Add target to project</h2>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">{{lang.title}}</label>
+      <div class="col-lg-12">
+        <input class="form-control" id="title" placeholder="Title" ng-model="titleTarget" type="text">
+      </div>
+    </div>
+   
+    <div class="form-group">
+      <label for="textArea" class="col-lg-2 control-label">{{lang.description}}</label>
+      <div class="col-lg-12">
+        <textarea class="form-control" rows="3" ng-model="descriptionTarget" id="textArea"></textarea>
+        <span class="help-block"></span>
+      </div>
+    </div>
+<button type="button" style="margin:5px"  ng-click="addTarget(titleTarget,descriptionTarget,moneyTarget,endDateTarget);toggleModal()" onclick=" $(window).unbind('scroll');" class="btn btn-primary">{{lang.addButton}}</button><button  ng-click="toggleModal()" onclick=" $(window).unbind('scroll');" class="btn btn-danger">{{lang.cancelButton}} </button>
+
+    </div>
+     <div class="col-md-6 col-sm-12 col-xs-12">  
+
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label">{{lang.money}}</label>
+      <div class="col-lg-12">
+        <input class="form-control" id="title" placeholder="Title" ng-model="moneyTarget" type="text">
+      </div>
+    </div>
+   <label for="datetimepicker2" class="col-lg-6 control-label">{{lang.endDate}}</label>
+  <div class="input-group date"  id="datetimepicker2">
+    <input type="text" class="form-control"  data-ng-model="endDateTarget" 
+            />
+    <span class="input-group-addon" >
+      <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+  </div>
+
+
+    </div>
+    </div>
+
     </div>
 </modal-dialog>
  <div class="container-fluid">
@@ -153,6 +202,16 @@ $(document).ready(function() {
     $(window).unbind('scroll');
   });
 });
+  $(function () {
+    $('#datetimepicker2').datetimepicker(
+      {pickTime: false, language: 'ru'}
+    );
 
+ 
+
+  });
+
+</script>
+<script type="text/javascript">
 
 </script>

@@ -10,40 +10,18 @@
         
       </div>
 <div class="col-lg-2 col-md-5 col-sm-12 col-xs-12" style="margin-top:20px ">
-        <a href="#" style=""><h4  align="center">{{lang.seeMore}}</h4></a>
+        
       </div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  >
-        <div style="background-color: #F7F7F7" >
-         <img alt="300x200" style="width: 100%"  src="http://placehold.it/200x150">
-        <h4 align="center">Title new</h4>
-        <p style="padding:10px">Small description about news. Small description about news</p>
+<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" ng-repeat="new in allNews" >
+        <div style="background-color: #F7F7F7; height:400px" >
+         <img alt="300x200" style="width: 100%"  src="http://институт-рост.рф/upload/image/noviy_nabor_v_institut_rosta(1).png">
+        <a href="#/project/{{new.id}}"><h4 align="center">{{new.title}}</h4></a>
+        <p style="padding:10px">{{new.text}}</p>
         </div>
 
       </div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  >
-        <div style="background-color: #F7F7F7" >
-         <img alt="300x200" style="width: 100%"  src="http://placehold.it/200x150">
-        <h4 align="center">Title new</h4>
-        <p style="padding:10px">Small description about news. Small description about news</p>
-        </div>
 
-      </div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  >
-        <div style="background-color: #F7F7F7" >
-         <img alt="300x200" style="width: 100%"  src="http://placehold.it/200x150">
-        <h4 align="center">Title new</h4>
-        <p style="padding:10px">Small description about news. Small description about news</p>
-        </div>
 
-      </div>
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  >
-        <div style="background-color: #F7F7F7" >
-         <img alt="300x200" style="width: 100%"  src="http://placehold.it/200x150">
-        <h4 align="center">Title new</h4>
-        <p style="padding:10px">Small description about news. Small description about news</p>
-        </div>
-
-      </div>
  <div class="container-fluid">
       
       <div class="row" >
@@ -72,7 +50,7 @@
               <a href="#/project/{{project._id}}"> <img alt="300x200" style="width: 100%; max-height: 300px;" src="proimage/{{project.image}}"></a>
             </div>
             <div class="caption">
-             <a href="#/project/{{project._id}}> <h2 style="padding-left: 10px; font-size: 16pt">{{project.title}}</h2></a>
+             <a href="#/project/{{project._id}}"> <h2 style="padding-left: 10px; font-size: 16pt">{{project.title}}</h2></a>
              
             </div>
             <div class="modal-footer" >
@@ -87,12 +65,12 @@
                  
                   
                     <div class="progress">
-                      <div data-percentage="0%" style="width: {{proj.curMoney/(proj.money)}}%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div data-percentage="0%" style="width: {{project.curMoney*100/(project.money)}}%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     
               
                 </div>
-            <div class="col-md-4"><b>{{project.curMoney/(project.money)}}</b><br/><small>FUNDED</small></div>
+            <div class="col-md-4"><b>{{project.curMoney}}</b><br/><small>FUNDED</small></div>
                 <div class="col-md-4"><b>${{project.money}}</b><br/><small>NEED</small></div>
                 <div class="col-md-4"><b>{{rnd((project.endDate-project.date)/60/60/24)}}</b><br/><small>DAYS</small></div>
               </div>
@@ -127,19 +105,18 @@
         
       </div>
 <div class="col-lg-2 col-md-5 col-sm-12 col-xs-12" style="margin-top:20px ">
-        <a href="#" style=""><h4  align="center">{{lang.seeMore}}</h4></a>
+       
       </div>
 
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  >
+<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  ng-repeat="project in bestProjects" >
         
-          <div class="thumbnail" style="padding: 0; background-color: #F7F7F7;">
+          <div class="thumbnail" style="padding: 0; background-color: #F7F7F7; height:360px">
             <div style="padding:4px">
-              <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
+              <a href="#/project/{{project._id}}"> <img alt="300x200" style="width: 100%; max-height: 300px;" src="proimage/{{project.image}}"></a>
             </div>
             <div class="caption">
-              <h2 style="padding-left: 10px; ">Project </h2>
-              <p style="padding-left: 10px; ">My project description. My project description. My project description </p>
-              
+             <a href="#/project/{{project._id}}"> <h2 style="padding-left: 10px; font-size: 16pt">{{project.title}}</h2></a>
+             
             </div>
             <div class="modal-footer" >
              
@@ -153,14 +130,14 @@
                  
                   
                     <div class="progress">
-                      <div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div data-percentage="0%" style="width: {{project.curMoney*100/(project.money)}}%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     
               
                 </div>
-                <div class="col-md-4"><b>60%</b><br/><small>{{lang.funded}}</small></div>
-                <div class="col-md-4"><b>$400</b><br/><small>{{lang.need}}</small></div>
-                <div class="col-md-4"><b>18</b><br/><small>{{lang.days}}</small></div>
+            <div class="col-md-4"><b>${{project.curMoney}}</b><br/><small>FUNDED</small></div>
+                <div class="col-md-4"><b>${{project.money}}</b><br/><small>NEED</small></div>
+              
               </div>
               </div>
             </div>
@@ -168,117 +145,9 @@
        
       </div>
 
-<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  >
-        
-          <div class="thumbnail" style="padding: 0; background-color: #F7F7F7;">
-            <div style="padding:4px">
-              <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
-            </div>
-            <div class="caption">
-              <h2 style="padding-left: 10px; ">Project </h2>
-              <p style="padding-left: 10px; ">My project description. My project description. My project description </p>
-              
-            </div>
-            <div class="modal-footer" >
-             
 
-              
-          
-
-              <div class="container-fluid">
-              <div class="row">
-<div class="col-md-12" >
-                 
-                  
-                    <div class="progress">
-                      <div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    
-              
-                </div>
-                <div class="col-md-4"><b>60%</b><br/><small>FUNDED</small></div>
-                <div class="col-md-4"><b>$400</b><br/><small>PLEDGED</small></div>
-                <div class="col-md-4"><b>18</b><br/><small>DAYS</small></div>
-              </div>
-              </div>
-            </div>
-          </div>
-       
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  >
-        
-          <div class="thumbnail" style="padding: 0; background-color: #F7F7F7;">
-            <div style="padding:4px">
-              <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
-            </div>
-            <div class="caption">
-              <h2 style="padding-left: 10px; ">Project </h2>
-              <p style="padding-left: 10px; ">My project description. My project description. My project description </p>
-              
-            </div>
-            <div class="modal-footer" >
-             
-
-              
-          
-
-              <div class="container-fluid">
-              <div class="row">
-<div class="col-md-12" >
-                 
-                  
-                    <div class="progress">
-                      <div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    
-              
-                </div>
-                <div class="col-md-4"><b>60%</b><br/><small>FUNDED</small></div>
-                <div class="col-md-4"><b>$400</b><br/><small>PLEDGED</small></div>
-                <div class="col-md-4"><b>18</b><br/><small>DAYS</small></div>
-              </div>
-              </div>
-            </div>
-          </div>
-       
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12"  >
-        
-          <div class="thumbnail" style="padding: 0; background-color: #F7F7F7;">
-            <div style="padding:4px">
-              <img alt="300x200" style="width: 100%" src="http://placehold.it/200x150">
-            </div>
-            <div class="caption">
-              <h2 style="padding-left: 10px; ">Project </h2>
-              <p style="padding-left: 10px; ">My project description. My project description. My project description </p>
-              
-            </div>
-            <div class="modal-footer" >
-             
-
-              
-          
-
-              <div class="container-fluid">
-              <div class="row">
-<div class="col-md-12" >
-                 
-                  
-                    <div class="progress">
-                      <div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    
-              
-                </div>
-                <div class="col-md-4"><b>60%</b><br/><small>FUNDED</small></div>
-                <div class="col-md-4"><b>$400</b><br/><small>PLEDGED</small></div>
-                <div class="col-md-4"><b>18</b><br/><small>DAYS</small></div>
-              </div>
-              </div>
-            </div>
-          </div>
-       
-      </div>
+     
+     
 
 
 

@@ -2,6 +2,7 @@ app.controller('projCtrl',
     function projCtrl($scope,$http,$location,$rootScope){
        $scope.apple2 = "new apple";
        $scope.idAdded = 0;
+       $scope.addNewsBool = true;
         $scope.toggleModal = function() {
         $scope.modalShown = !$scope.modalShown;
    };
@@ -26,7 +27,27 @@ app.controller('projCtrl',
                 });
       }
 
+      $scope.addTarget = function(title,text,money,date) {
+        console.log(title,text,money,date);
+          var parts =date.split('.');
+ var mydate = new Date(parts[2],parts[1]-1,parts[0]);
+        console.log($scope.idAdded);
+         var newPost = {
+            idProject:$scope.idAdded,
+            title:title,
+            text:text,
+            sum:money,
+            date:mydate.getTime()/1000,
 
+        }
+        console.log(newPost);
+         $http.post("/targets", newPost).then(function success (response) {
+                    console.log(response.data);
+
+                });
+
+
+      }
 
 
 
