@@ -439,6 +439,7 @@ var checkProjects = function(users) {
     });
   });
 
+
 router.get('/bestProjects', (req, res) => {
     
     
@@ -1035,6 +1036,48 @@ console.log(doc);
     });
   });
 
+  router.get('/user/:id', (req, res) => {
+    User.findById(req.params.id, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+     doc.password = "";
+console.log(doc);
+      res.send(doc);
+    });
+  });
+
+  router.get('/userProjects/:id', (req, res) => {
+    project.find({owner:req.params.id,valute:0}, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+     
+console.log(doc);
+      res.send(doc);
+    });
+  });
+
+  router.get('/userProjectsFail/:id', (req, res) => {
+    project.find({owner:req.params.id,valute:-1}, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+     
+console.log(doc);
+      res.send(doc);
+    });
+  });
+  router.get('/userProjectsLuck/:id', (req, res) => {
+    project.find({owner:req.params.id,valute:1}, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+}     
+     
+console.log(doc);
+      res.send(doc);
+    });
+  });
 
        router.get('/projectsMark/:id', (req, res) => {
     project.findById(req.params.id, (err, doc) => {

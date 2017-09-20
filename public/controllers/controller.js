@@ -53,6 +53,9 @@ $rootScope.isIn = false;
     templateUrl: 'views/adminPanel.html',
             controller:'adminCtrl'
   })
+.when('/profile/:id', {
+    templateUrl: 'views/profile.html'
+  })
 .when('/helpProject/:id', {
     templateUrl: 'views/help.html',
             controller:'helpCtrl'
