@@ -1,8 +1,9 @@
 <hr class="">
+<div ng-controller="profileCtrl">
 <div class="container target">
     <div class="row">
         <div class="col-sm-10">
-             <h1 class="">Starfox221</h1>
+             <h1 class="">{{curUser.login}}</h1>
          
           <button type="button" class="btn btn-success">Subscribe</button>  
 <br>
@@ -17,11 +18,11 @@
             <!--left col-->
             <ul class="list-group">
                 <li class="list-group-item text-muted" contenteditable="false">Profile</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined</strong></span> 2.13.2014</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Last seen</strong></span> Yesterday</li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Real name</strong></span> Joseph
-                        Doe</li>
-              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Role: </strong></span> Pet Sitter
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined </strong></span>{{curUser.date *1000| date:'dd.MM.yyyy'}}</li>
+            
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">E-mail </strong></span> {{curUser.email}}
+                       </li>
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Role: </strong></span> {{curUser.role}}
                
                       </li>
             </ul>
@@ -38,23 +39,134 @@
 
                	
                	   <div class="row" style="">
-<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12" >
-        <h2  align="center">{{lang.newProject}}</h2><br>
+<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12" >
+        <h2  align="center">Current projects</h2><br>
       </div>
-      <div class="col-lg-8 col-md-1 col-sm-12 col-xs-12" >
+      <div class="col-lg-5 col-md-1 col-sm-12 col-xs-12" >
         
       </div>
 <div class="col-lg-2 col-md-5 col-sm-12 col-xs-12" style="margin-top:20px ">
-        <a href="#/all/1" style=""><h4  align="center">{{lang.seeMore}}</h4></a>
+        <a href="#/all/1" style=""><h4  align="center"></h4></a>
       </div>
-<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" >
-        
+    
+
+<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="project in curProjects">
+        	
           <div class="thumbnail" style="padding: 0; background-color: #F7F7F7">
             <div style="padding:4px">
               <a href="#/project/{{project._id}}"> <img alt="300x200" style="width: 100%; max-height: 300px;" src="proimage/{{project.image}}"></a>
             </div>
             <div class="caption">
-             <a href="#/project/{{project._id}}"> <h2 style="padding-left: 10px; font-size: 16pt">Title</h2></a>
+             <a href="#/project/{{project._id}}"> <h2 style="padding-left: 10px; font-size: 16pt">{{project.title}}</h2></a>
+             
+            </div>
+            <div class="modal-footer" >
+             
+
+              
+          
+
+              <div class="container-fluid">
+              <div class="row">
+<div class="col-md-12" >
+                 
+                  
+                    <div class="progress">
+                      <div data-percentage="0%" style="width: {{project.curMoney*100/(project.money)}}%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    
+              
+                </div>
+            <div class="col-md-4"><b>{{project.curMoney}}</b><br/><small>FUNDED</small></div>
+                <div class="col-md-4"><b>${{project.money}}</b><br/><small>NEED</small></div>
+                <div class="col-md-4"><b>{{rnd((project.endDate-project.date)/60/60/24)}}</b><br/><small>DAYS</small></div>
+              </div>
+              </div>
+            </div>
+          </div>
+       
+      </div>
+
+  
+
+
+
+    </div>
+    <div class="row" style="">
+<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12" ><br>
+        <h2  align="center">Best projects</h2><br>
+      </div>
+      <div class="col-lg-5 col-md-1 col-sm-12 col-xs-12" >
+        
+      </div>
+<div class="col-lg-2 col-md-5 col-sm-12 col-xs-12" style="margin-top:20px ">
+        <a href="#/all/1" style=""><h4  align="center"></h4></a>
+      </div>
+    
+
+<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="project in bestProjects">
+        	
+          <div class="thumbnail" style="padding: 0; background-color: #F7F7F7">
+            <div style="padding:4px">
+              <a href="#/project/{{project._id}}"> <img alt="300x200" style="width: 100%; max-height: 300px;" src="proimage/{{project.image}}"></a>
+            </div>
+            <div class="caption">
+             <a href="#/project/{{project._id}}"> <h2 style="padding-left: 10px; font-size: 16pt">{{project.title}}</h2></a>
+             
+            </div>
+            <div class="modal-footer" >
+             
+
+              
+          
+
+              <div class="container-fluid">
+              <div class="row">
+<div class="col-md-12" >
+                 
+                  
+                    <div class="progress">
+                      <div data-percentage="0%" style="width: {{project.curMoney*100/(project.money)}}%;" class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    
+              
+                </div>
+            <div class="col-md-4"><b>{{project.curMoney}}</b><br/><small>FUNDED</small></div>
+                <div class="col-md-4"><b>${{project.money}}</b><br/><small>NEED</small></div>
+                <div class="col-md-4"><b>{{rnd((project.endDate-project.date)/60/60/24)}}</b><br/><small>DAYS</small></div>
+              </div>
+              </div>
+            </div>
+          </div>
+       
+      </div>
+
+  
+
+
+
+    </div>
+
+     <div class="row" style="">
+<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12" ><br>
+        <h2  align="center">Fail projects</h2><br>
+      </div>
+      <div class="col-lg-5 col-md-1 col-sm-12 col-xs-12" >
+        
+      </div>
+<div class="col-lg-2 col-md-5 col-sm-12 col-xs-12" style="margin-top:20px ">
+        <a href="#/all/1" style=""><h4  align="center"></h4></a>
+      </div>
+    
+
+<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="project in failProjects">
+        	
+          <div class="thumbnail" style="padding: 0; background-color: #F7F7F7">
+            <div style="padding:4px">
+              <a href="#/project/{{project._id}}"> <img alt="300x200" style="width: 100%; max-height: 300px;" src="proimage/{{project.image}}"></a>
+            </div>
+            <div class="caption">
+             <a href="#/project/{{project._id}}"> <h2 style="padding-left: 10px; font-size: 16pt">{{project.title}}</h2></a>
              
             </div>
             <div class="modal-footer" >
@@ -110,4 +222,4 @@
         
 	
 	
-</div>
+</div></div>
