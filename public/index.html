@@ -15,7 +15,9 @@
 <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" />
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-resource.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.2.27/angular-sanitize.min.js"></script>
 
 <script  src='controllers/controller.js'></script>
@@ -80,7 +82,7 @@
       </div>
     </div>
    
-  <div ng-view></div>
+  <div ui-view></div>
 
   <!--Футер-->
   <footer>
@@ -88,21 +90,55 @@
   </footer>
 
   </div>
+<script src="app/Login/AppLogin.js"></script>
+<script src="app/Profile/AppProfile.js"></script>
+<script src="app/HelpProject/AppHelpProject.js"></script>
+<script src="app/Home/AppHome.js"></script>
+<script src="app/AdminPanel/AppAdminPanel.js"></script>
+<script src="app/VerifyUser/AppVerifyUser.js"></script>
+<script src="app/EditProject/AppEditProject.js"></script>
+<script src="app/ProjectPage/AppProjectPage.js"></script>
+<script src="app/AllProjects/AppAllProjects.js"></script>
+<script src="app/AddProject/AppAddProject.js"></script>
+<script src="app/MyProjects/AppMyProjects.js"></script>
+<script src="app/UserPanel/AppUserPanel.js"></script>
+<script src="app/Register/AppRegister.js"></script>
+<script src="app/app.js"></script>
 
 <script  src='controllers/controller.js'></script>
-<script src="controllers/signin.js"></script>
-<script src="controllers/signup.js"></script>
-<script src="controllers/proj.js"></script>
-<script src="controllers/add.js"></script>
-<script src="controllers/project.js"></script>
-<script src="controllers/edit.js"></script>
-<script src="controllers/index.js"></script>
-<script src="controllers/panel.js"></script>
-<script src="controllers/verify.js"></script>
-<script src="controllers/admin.js"></script>
-<script src="controllers/allProjects.js"></script>
-<script src="controllers/help.js"></script>
-<script src="controllers/profile.js"></script>
+
+<script src="app/Login/LoginService.js"></script>
+<script src="app/Login/LoginController.js"></script>
+<script src="app/Register/RegisterService.js"></script>
+<script src="app/Register/RegisterController.js"></script>
+<script src="app/Home/HomeService.js"></script>
+<script src="app/Home/HomeController.js"></script>
+<script src="app/MyProjects/MyProjectsService.js"></script>
+<script src="app/MyProjects/MyProjectsController.js"></script>
+<script src="app/AddProject/AddProjectService.js"></script>
+<script src="app/AddProject/AddProjectController.js"></script>
+<script src="app/AllProjects/AllProjectsService.js"></script>
+<script src="app/AllProjects/AllProjectsController.js"></script>
+<script src="app/EditProject/EditProjectService.js"></script>
+<script src="app/EditProject/EditProjectController.js"></script>
+
+<script src="app/ProjectPage/ProjectPageService.js"></script>
+<script src="app/ProjectPage/ProjectPageController.js"></script>
+
+<script src="app/VerifyUser/VerifyUserService.js"></script>
+<script src="app/VerifyUser/VerifyUserController.js"></script>
+
+
+<script src="app/AdminPanel/AdminPanelService.js"></script>
+<script src="app/AdminPanel/AdminPanelController.js"></script>
+
+<script src="app/Profile/ProfileService.js"></script>
+<script src="app/Profile/ProfileController.js"></script>
+
+<script src="app/HelpProject/HelpProjectService.js"></script>
+<script src="app/HelpProject/HelpProjectController.js"></script>
+
+
 <script type="text/javascript">
   /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */

@@ -460,7 +460,7 @@ router.get('/newProjects', (req, res) => {
       res.send(users);
       checkProjects(users);
       console.log('vibor');
-    }).sort({date:-1});
+    }).sort({date:-1}).limit(4);
   });
 
 
