@@ -8,6 +8,7 @@ var commentScheme = new mongoose.Schema( {
     date:{type: Number}
 } );
 
+commentScheme.index({text: 'text'});
 
 module.exports = function(db) {
 

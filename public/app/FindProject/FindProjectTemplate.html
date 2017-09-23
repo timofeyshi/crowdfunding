@@ -1,0 +1,31 @@
+<br>
+<div ng-controller="findCtrl">
+  <div class="container-fluid">
+
+      <div class="row" style="">
+<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" >
+        <h2  align="center">Find result: {{findTextAll}}</h2><br>
+      </div>
+      <div class="col-lg-7 col-md-1 col-sm-12 col-xs-12" >
+        
+      </div>
+<div class="col-lg-2 col-md-5 col-sm-12 col-xs-12" style="margin-top:20px ">
+        
+      </div>
+<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" ng-repeat="new in findProjects" >
+        <div style="background-color: #F7F7F7; height:250px" align="center">
+         <a href="#/project/{{new.idProject}}"><img alt="300x200" style="width: 60%"  src="http://download.seaicons.com/icons/alecive/flatwoken/512/Apps-Search-icon.png"></a>
+        <a href="#/project/{{new.idProject}}"><h4 align="center">{{new.title}}</h4></a>
+        <p style="padding:10px"></p>
+        </div>
+
+      </div>
+
+
+
+ 
+     
+
+    </div>
+</div>
+</div>

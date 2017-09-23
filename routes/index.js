@@ -2,6 +2,7 @@ const express = require('express');
 var multer  = require('multer');
 var markdown = require('markdown').markdown
 var bCrypt = require('bcrypt-nodejs');
+var textSearch = require('mongoose-text-search');
 
 
 
@@ -437,6 +438,73 @@ var checkProjects = function(users) {
       checkProjects(users);
       console.log('vibor');
     });
+  });
+
+  
+
+
+
+  router.get('/search', (req, res) => {
+    console.log(req.query.word);
+    var allFind =[];
+    var projectIs = commentIs = targetIs = newsIs = null;
+    var process = function() {
+      if (projectIs&& commentIs&&targetIs&&newsIs) {
+        console.log(allFind);
+           res.send(allFind);
+        console.log('asin: ',projectIs);
+        console.log('asin: ',commentIs);
+        console.log('asin: ',targetIs);
+        console.log('asin: ',newsIs);
+      }
+    }
+     project.find({$text: {$search: req.query.word}}).exec(function(err, docs) { 
+      for(it in docs) {
+      var findNode = {
+        title:docs[it].title,
+        idProject:docs[it]._id
+      };
+      allFind.push(findNode);
+    }
+      projectIs = docs;
+      process();
+    });
+     comment.find({$text: {$search: req.query.word}}).exec(function(err, docs) { 
+      for(it in docs) {
+      var findNode = {
+        title:docs[it].text,
+        idProject:docs[it].idProject
+      };
+      allFind.push(findNode);
+    }
+      commentIs = docs;
+      process();
+    });
+       target.find({$text: {$search: req.query.word}}).exec(function(err, docs) { 
+         for(it in docs) {
+      var findNode = {
+        title:docs[it].title,
+        idProject:docs[it].idProject
+      };
+      allFind.push(findNode);
+    }
+      targetIs = docs;
+      process();
+    });
+         news.find({$text: {$search: req.query.word}}).exec(function(err, docs) { 
+           for(it in docs) {
+      var findNode = {
+        title:docs[it].title,
+        idProject:docs[it].id
+      };
+      allFind.push(findNode);
+    }
+      newsIs = docs;
+      process();
+    });
+    
+ 
+   
   });
 
 

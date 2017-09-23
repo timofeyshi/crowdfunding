@@ -45,7 +45,7 @@
     	<div class="col-md-2 col-sm-12 col-xs-12" >
     		<a style="text-decoration:none; color:{{color.fontColor}}" href="/"><h2 style="color: {{color.fontColor}}" align="center">crowdfund </h2></a>
     	</div>
-		<div class="col-md-8 col-sm-12 col-xs-12" >
+		<div class="col-md-3 col-sm-12 col-xs-12" >
     		 <div class="dropdown" width="50px" style="background-color: {{color.headerColor}}">
   <button onclick="myFunction()" class="dropbtn">{{lang.settings}}</button>
   <div id="myDropdown" class="dropdown-content">
@@ -56,6 +56,9 @@
   </div>
 </div>
     	</div>
+      <div class="col-md-2 col-sm-12 col-xs-12" style="padding:0">
+         <input type="text" class="form-control" style="height: 30px; margin-top: 5px" data-ng-model="findText"></div><div class="col-md-1 col-sm-12 col-xs-12" style="padding:0"><button  type="button" class="btn btn-primary" style="height:30px;margin-top: 5px; " ng-click="findProject(findText)">Find</button>
+      </div><div class="col-md-2 col-sm-12 col-xs-12"></div>
   
       <div ng-show="!userIn" class="col-md-1 col-sm-12 col-xs-12" align="center" style=" padding-top:7px">
 
@@ -103,6 +106,7 @@
 <script src="app/MyProjects/AppMyProjects.js"></script>
 <script src="app/UserPanel/AppUserPanel.js"></script>
 <script src="app/Register/AppRegister.js"></script>
+<script src="app/FindProject/AppFindProject.js"></script>
 <script src="app/app.js"></script>
 
 <script  src='controllers/controller.js'></script>
@@ -137,6 +141,9 @@
 
 <script src="app/HelpProject/HelpProjectService.js"></script>
 <script src="app/HelpProject/HelpProjectController.js"></script>
+
+<script src="app/FindProject/FindProjectService.js"></script>
+<script src="app/FindProject/FindProjectController.js"></script>
 
 
 <script type="text/javascript">

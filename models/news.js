@@ -7,6 +7,7 @@ var newsScheme = new mongoose.Schema( {
     date:{type: Number}
 } );
 
+newsScheme.index({title: 'text',text: 'text'});
 
 module.exports = function(db) {
 

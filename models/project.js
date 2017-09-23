@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+
+
 var projectScheme = new mongoose.Schema( {
     title: { type: String},
     money: { type: Number },
@@ -12,6 +14,7 @@ var projectScheme = new mongoose.Schema( {
     owner: {type:String}
 } );
 
+projectScheme.index({title: 'text', description: 'text'});
 
 module.exports = function(db) {
 

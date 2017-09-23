@@ -1,7 +1,7 @@
 
 
 var app = angular.module('RoutingApp', ['ui.router','ngSanitize','AppLogin','AppRegister','AppHome','AppUserPanel','AppMyProjects','AppAddProject',
-  'AppAllProjects','AppProjectPage','AppEditProject','AppVerifyUser','AppAdminPanel','AppProfile','AppHelpProject']);
+  'AppAllProjects','AppProjectPage','AppEditProject','AppVerifyUser','AppAdminPanel','AppProfile','AppHelpProject','AppFindProject']);
 app.run(function($rootScope) {
 
 $rootScope.isIn = false;
@@ -29,8 +29,15 @@ $rootScope.isIn = false;
 });
 
 app.controller('mainCtrl', 
-    function ($scope,$http,$rootScope){
+    function ($scope,$http,$rootScope,$location){
         
+      $scope.findProject = function(text) {
+        
+      
+        var url = '/find/' + text;
+        $location.url(url);
+
+      };
 
       $scope.reInfo = function() {
           $http({method:'GET', url: '/give'}).

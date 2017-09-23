@@ -8,6 +8,7 @@ var targetScheme = new mongoose.Schema( {
     date:{type: Number}
 } );
 
+targetScheme.index({title: 'text',description: 'text'});
 
 module.exports = function(db) {
 
