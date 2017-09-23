@@ -1,6 +1,6 @@
 angular.module('AppProfile')
 .controller('profileCtrl', 
-    function profileCtrl($scope,$http,$location,$rootScope,$stateParams){
+    function profileCtrl($scope,$http,$location,$rootScope,$stateParams,ProjectPageService){
         var urlProfile = "/user/" + $stateParams['id'];
         var urlBestProjects = "/userProjectsLuck/" + $stateParams['id'];
         var urlProjects = "/userProjects/" +  $stateParams['id'];
@@ -8,7 +8,9 @@ angular.module('AppProfile')
        $http({method:'GET', url: urlProfile}).
     then(function success(response) {
             $scope.curUser =  response.data;
-            
+             $scope.payLevel = ProjectPageService.getPayMedal($scope.curUser.medals);
+               $scope.commentLevel = ProjectPageService.getCommentMedal($scope.curUser.medals);
+                $scope.projectLevel = ProjectPageService.getProjectMedal($scope.curUser.medals);
     }, function error(response){
             console.log("Возникла ошибка");
     }

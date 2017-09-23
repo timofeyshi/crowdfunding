@@ -64,5 +64,9 @@
 	"projectNews":"Project news",
 	"goal":"GOALS",
 	"achieved":"achieved",
-	"overdue":"overdue"
+	"overdue":"overdue",
+	"commentator":"Commentator",
+	"investor":"Investor",
+	"projectCreater":"Projects creater",
+	"level":"level"
 }

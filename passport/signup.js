@@ -52,6 +52,7 @@ var confirm = require('../models/confirm')(db);
                         newUser.language = 0;
                         newUser.rate = 0;
                         newUser.date = timestamp.now();
+                        newUser.medals = [];
 
                         // save the user
                         newUser.save(function(err) {

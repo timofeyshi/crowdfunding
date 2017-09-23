@@ -2,11 +2,14 @@
 <div ng-controller="profileCtrl">
 <div class="container target">
     <div class="row">
-        <div class="col-sm-10">
+        <div class="col-sm-6">
              <h1 class="">{{curUser.login}}</h1>
          
           <button type="button" class="btn btn-success">Subscribe</button>  
-<br>
+
+        </div>
+        <div class="col-sm-4">
+        
         </div>
       <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image"  class="img-circle img-responsive" style="width:50%" src="http://sobory.ru/_i/blank_profile.png"></a>
 
@@ -25,6 +28,10 @@
               <li class="list-group-item text-right"><span class="pull-left"><strong class="">Role: </strong></span> {{curUser.role}}
                
                       </li>
+                      <li class="list-group-item text-right"><img ng-show="payLevel" src="img/medal{{payLevel}}investor.jpg" width="30%">
+        <img ng-show="commentLevel" src="img/medal{{commentLevel}}comment.jpg" width="31%">
+                    <img ng-show="projectLevel" src="img/medal{{projectLevel}}creater.jpg" width="31%"></li>
+                    
             </ul>
        
            

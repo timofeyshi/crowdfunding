@@ -55,12 +55,26 @@ angular.module('AppProjectPage')
     }
   );
     
-    $scope.project =  ProjectPageService.getProject(id);
-            if ($scope.project.valute == -1) {
+    var projectInfo =  ProjectPageService.getProject(id,function() {
+
+      console.log("prj info",projectInfo.owner);
+      if (projectInfo.valute == -1) {
               $scope.showTitle = false;
             } else {
               $scope.showTitle = true;
             }
+            var userProject = ProjectPageService.getUser($scope.project.owner,function(){
+              $scope.payLevel = ProjectPageService.getPayMedal(userProject.medals);
+               $scope.commentLevel = ProjectPageService.getCommentMedal(userProject.medals);
+                $scope.projectLevel = ProjectPageService.getProjectMedal(userProject.medals);
+            });
+             $scope.userProject = userProject;
+    });
+    $scope.project = projectInfo;
+    console.log($scope.project);
+    
+
+            
 
      $scope.getBackground = function(money,date) {
       console.log($scope.project.curMoney);

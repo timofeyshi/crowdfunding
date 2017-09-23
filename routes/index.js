@@ -707,6 +707,7 @@ router.get('/setBlack', (req, res) => {
       if (doc != null) {
 
        doc.rate = 1;
+
       doc.save((err, newUser) => {
       if (err) {
 
@@ -908,7 +909,18 @@ res.send("error");
    if (req.user.role >=1) {
       addComment(req.body.idProject,req.user.id,req.user.login,  req.body.text, req.body.date);
     console.log(req.user);
+     User.findById(req.user.id, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+  }
+      if (doc != null) {
 
+      
+       
+       if (doc.medals.indexOf(4) == -1) {
+       doc.medals.push(4);}
+      doc.save((err, newUser) => {});
+    } });
     res.send('you add comment');
 
 } else {
@@ -980,6 +992,26 @@ addPayment(req.params.id,req.user.id,req.user.login,  req.params.sum, Date.now()
       }
     });
      
+     
+
+
+       User.findById(req.user.id, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+  }
+      if (doc != null) {
+
+      if (req.params.sum >= 100&&doc.medals.indexOf(2) == -1) {
+       doc.medals.push(2);}
+       if (req.params.sum >= 500&&doc.medals.indexOf(3) == -1) {
+       doc.medals.push(3);}
+       if (doc.medals.indexOf(1) == -1) {
+       doc.medals.push(1);}
+      doc.save((err, newUser) => {});
+    } });
+
+
+
     
     });
 
@@ -1086,6 +1118,20 @@ router.get('/maxpay', (req, res) => {
 
   router.post('/projects',isCreator ,(req, res) => {
     addUser(req.body.title, req.body.money, req.body.description, req.body.valute, req.body.image, req.body.date, req.body.endDate,req.user._id);
+      User.findById(req.user.id, (err, doc) => {
+      if (err) {  res.send("error");
+        return console.log(err);
+  }
+      if (doc != null) {
+
+      
+       
+       if (doc.medals.indexOf(5) == -1) {
+       doc.medals.push(5);}
+      doc.save((err, newUser) => {});
+    } });
+
+
     console.log(req.body.title);
     res.send('Hello');
   });
@@ -1114,6 +1160,8 @@ console.log(doc);
       res.send(doc);
     });
   });
+
+  
 
   router.get('/userProjects/:id', (req, res) => {
     project.find({owner:req.params.id,valute:0}, (err, doc) => {

@@ -8,7 +8,8 @@ var userScheme = new mongoose.Schema( {
     role: { type: Number },
     valute: {type: Number},
     language: { type: Number },
-    rate: { type: Number }
+    rate: { type: Number },
+    medals:{type: [Number]}
 } );
 
 

@@ -65,5 +65,9 @@
 	"projectNews":"Новости проекта",
 	"goal":"Цели",
 	"achieved":"Достигнуто",
-	"overdue":"Просрочено"
+	"overdue":"Просрочено",
+	"commentator":"Комментартор",
+	"investor":"Инвестор",
+	"projectCreater":"Создатель проектов",
+	"level":"уровня"
 }

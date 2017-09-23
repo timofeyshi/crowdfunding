@@ -23,8 +23,12 @@
 						<div class="funding-meta" >
 							<h1 ng-show="showTitle" style="background-color:{{color.headerColor}}">{{project.title}}</h1>
 							<h1 ng-show="!showTitle" style="background-color:red">{{project.title}}</h1>
-							<span class="type-meta"><i class="fa fa-user"></i> Jonathan Doe</span>
-							<span class="type-meta"><i class="fa fa-tag"></i> <a href="#">#crowdfunding</a>, <a href="#">#launch</a> </span>
+							<span class="type-meta"><i class="fa fa-user"></i><a href="/#/profile/{{userProject._id}}">{{userProject.login}}</a></span>
+							<span class="type-meta"><i class="fa fa-tag"></i> 
+							<span ng-show="payLevel">{{lang.investor}} {{payLevel}} {{lang.level}},</span> 
+							<span ng-show="commentLevel">{{lang.commentator}} {{commentLevel}} {{lang.level}},</span>
+							 <span ng-show="projectLevel">{{lang.projectCreater}} {{projectLevel}} {{lang.level}}</span>   
+					        </span>
 							
 							
 							<img src="proimage/{{project.image}}" width="100%" class="img-responsive" alt="launch HTML5 Crowdfunding">
