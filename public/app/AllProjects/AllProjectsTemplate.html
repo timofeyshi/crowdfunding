@@ -14,9 +14,9 @@
     	</div>
 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="padding-top:20px" ng-repeat="project in myProjects" >
         
-          <div class="thumbnail" style="padding: 0; background-color: #F7F7F7">
+          <div class="thumbnail" style="padding: 0; background-color: #F7F7F7; height:410px">
             <div style="padding:4px">
-              <a href="#/project/{{project._id}}"> <img alt="300x200" style="width: 100%; max-height: 300px;" src="proimage/{{project.image}}"></a>
+              <a href="#/project/{{project._id}}"> <img alt="300x200" style="width: 100%; max-height: 240px;" src="{{project.image}}"></a>
             </div>
             <div class="caption">
              <a href="#/project/{{project._id}}"> <h2 style="padding-left: 10px; font-size: 16pt">{{project.title}}</h2></a>

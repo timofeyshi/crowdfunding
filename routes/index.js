@@ -3,9 +3,14 @@ var multer  = require('multer');
 var markdown = require('markdown').markdown
 var bCrypt = require('bcrypt-nodejs');
 var textSearch = require('mongoose-text-search');
+var cloudinary = require('cloudinary');
+var fs = require('fs');
 
-
-
+cloudinary.config({ 
+  cloud_name: 'dpmhzijqc', 
+  api_key: '185678742813216', 
+  api_secret: 'zL9dVzIU9qhzpvi28QSEhzvaKGM' 
+});
 
 const router = express.Router();
 var filename2 = "";
@@ -179,7 +184,13 @@ router.post('/upload', function (req, res) {
       console.log(err);// An error occurred when uploading
       return;
     }
-    res.send(filename2);
+    
+    var uploadingUrl = "./public/proimage/" + filename2;
+    cloudinary.uploader.upload(uploadingUrl, function(result) { 
+    console.log("reslt::::::: :::::: ::::: ",result);
+    res.send(result.url);
+    }); 
+    fs.unlinkSync(uploadingUrl);
     console.log(filename2);
     // Everything went fine
   })
