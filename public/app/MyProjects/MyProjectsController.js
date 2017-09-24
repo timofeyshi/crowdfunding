@@ -2,14 +2,15 @@ angular.module('AppMyProjects')
 .controller('projCtrl', 
     function projCtrl($scope,$location,$rootScope,MyProjectsService){
        
-       $scope.idAdded = 0;
-       $scope.addNewsBool = true;
-        $scope.toggleModal = function() {
+      $scope.idAdded = 0;
+      $scope.addNewsBool = true;
+      
+      $scope.toggleModal = function() {
         $scope.modalShown = !$scope.modalShown;
       };
+
       $scope.clickPlus = function(id) {
         $scope.idAdded = id;
-
       }
 
       $scope.addNew = function(title,description) 
@@ -19,8 +20,8 @@ angular.module('AppMyProjects')
       }
 
       $scope.addTarget = function(title,text,money,date) {
-       MyProjectsService.setTargetData($scope.idAdded,title,text,money,date);
-       MyProjectsService.addTarget();
+        MyProjectsService.setTargetData($scope.idAdded,title,text,money,date);
+        MyProjectsService.addTarget();
       }
       
       $scope.delete = function(id) {
@@ -32,12 +33,9 @@ angular.module('AppMyProjects')
         return Math.round(inVar)+1;
        }
 
-    $scope.myProjects = MyProjectsService.getMyProjects();
+      $scope.getDays = function(days) {
+        return MyProjectsService.getDays(days);
+      }
 
-
-    }
-
-
-
-
-)
+      $scope.myProjects = MyProjectsService.getMyProjects();
+});

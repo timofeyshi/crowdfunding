@@ -25,7 +25,7 @@
             
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">E-mail </strong></span> {{curUser.email}}
                        </li>
-              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Role: </strong></span> {{curUser.role}}
+              <li class="list-group-item text-right"><span class="pull-left"><strong class="">Role: </strong></span> {{getStatus(curUser.role)}}
                
                       </li>
                       <li class="list-group-item text-right"><img ng-show="payLevel" src="img/medal{{payLevel}}investor.jpg" width="30%">

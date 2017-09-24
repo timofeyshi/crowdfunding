@@ -1,5 +1,5 @@
 angular.module('AppProjectPage')
-.service('ProjectPageService', function($resource){
+.service('ProjectPageService', function($resource,$http){
    	var reqAddComment =  $resource('/comments');
 
    	var commentData = {};
@@ -8,6 +8,59 @@ angular.module('AppProjectPage')
    	var reqNews = $resource('/news/:id');
     var reqUser = $resource('/user/:id');
    	var reqRating = $resource('/rating');
+    var reqComments = $resource('/comments/:id');
+    var reqGoals = $resource('/targets/:id');
+    var reqGetRating = $resource('/rating/:id');
+
+    this.mathRate = function(rate) {
+      var moda = 0;
+      var numMod = 0;
+      for (it in rate) {
+          moda += rate[it].rate;
+          numMod += 1;
+      }
+      if (numMod != 0) {
+        moda = moda / numMod;
+      } else {
+        moda = 1;
+      }
+      return moda;
+    }
+
+    this.getRating = function(idProject) {
+      var urlRating = "/rating/" + idProject;
+      $http({method:'GET', url: urlRating})
+        .then(function success(response) {
+           
+            return response.data; 
+        }, function error(response){
+            });
+    }
+
+    this.canVote = function(user,rate) {
+      var canVote = true;
+      var userId;
+      if (user) {
+        userId = user._id;
+      } else {
+        canVote = false;
+      }
+              
+      for (it in rate) {
+        if (rate[it].idUser == userId ) {
+            canVote = false;
+        }
+      }
+      return canVote;
+    }
+
+    this.getGoals = function(idProject) {
+      return reqGoals.query({id:idProject});
+    }
+
+    this.getComments = function(idProject) {
+      return reqComments.query({id:idProject});
+    }
 
    	this.setComment = function(id,text) {
    		commentData.idProject = id;

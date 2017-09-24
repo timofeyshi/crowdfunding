@@ -1,5 +1,6 @@
 angular.module('AppAddProject')
 .service('AddProjectService', function($resource,$http){
+    
 	var reqAddProject =  $resource('/projects');
 	var projectData = {};
 
@@ -25,14 +26,12 @@ angular.module('AppAddProject')
 	};
 
     this.addImage = function(files,func) {
-    	 var fd = new FormData();
-    //Take the first selected file
-    fd.append("file", files[0]);
-
-    $http.post("/upload", fd, {
+    	var fd = new FormData();
+        fd.append("file", files[0]);
+        $http.post("/upload", fd, {
         withCredentials: true,
         headers: {'Content-Type': undefined },
         transformRequest: angular.identity
-    }).then(func);
+        }).then(func);
     }
 });

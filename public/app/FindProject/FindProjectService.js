@@ -3,9 +3,8 @@ angular.module('AppFindProject')
 
 	this.find = function(text) {
 		var urlProject = "/search?word="+ text;
-		 var reqProjects = $resource(urlProject);
-		 return reqProjects.query();
-		
+		var reqProjects = $resource(urlProject);
+		return reqProjects.query();
 	}
 
 });

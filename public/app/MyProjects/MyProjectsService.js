@@ -15,7 +15,7 @@ angular.module('AppMyProjects')
     }
    
     this.addNew = function() {
-       return reqAddNew.save(newPost);
+      return reqAddNew.save(newPost);
     }
 
     this.setTargetData = function(id,title,text,money,date) {
@@ -29,7 +29,7 @@ angular.module('AppMyProjects')
     }
 
     this.addTarget = function() {
-       return reqAddTarget.save(newTarget);
+      return reqAddTarget.save(newTarget);
     }
 
     this.getMyProjects = function(func) {
@@ -40,4 +40,11 @@ angular.module('AppMyProjects')
       return reqDelete.delete({ id: idProject });
     }
     
+    this.getDays = function(days) {
+      if (days>=1) {
+        return days;
+      } else {
+        return 0;
+      }
+    }
 });
